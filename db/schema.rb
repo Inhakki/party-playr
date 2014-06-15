@@ -11,9 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140615180902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "rooms", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songs", force: true do |t|
+    t.string   "name",                    null: false
+    t.string   "artist",                  null: false
+    t.float    "length",                  null: false
+    t.integer  "upvotes",     default: 1
+    t.text     "spotify_url",             null: false
+    t.integer  "room_id",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "songs", ["room_id"], name: "index_songs_on_room_id", using: :btree
 
 end
