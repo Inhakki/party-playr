@@ -1,1 +1,12 @@
 <h1>Welcome to Room #<%= @room.id %></h1>
+
+<ul>
+  <% @songs.each do |song| %>
+    <li><%= song.spotify_url %></li>
+  <% end %>
+</ul>
+
+<script>
+  $current_song = $("li").first().text();
+  location.replace($current_song);
+</script>
