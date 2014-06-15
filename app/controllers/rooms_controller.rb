@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
 
   def search
     @room = Room.find params[:search_room]
-    render action: "show"
+    redirect_to @room
   end
 
 end
