@@ -9,4 +9,9 @@ class RoomsController < ApplicationController
     redirect_to @room
   end
 
+  def search
+    @room = Room.find params[:search_room]
+    render action: "show"
+  end
+
 end
