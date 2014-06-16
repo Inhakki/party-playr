@@ -1,6 +1,8 @@
 $( function() {
- var roomID = $( "h1:first" ).attr( "data-num" );
+  // store what room we're currently in for easy access
+  var roomID = $( "h1:first" ).attr( "data-num" );
 
+  // make an ajax call to get our songs from the database
   $.ajax({
     url: "/rooms/" + roomID + "/songs",
     type: "get",
@@ -8,39 +10,42 @@ $( function() {
     context: this
   }).then( displaySongs );
 
-  var currentSong = $( 'li:first' );
+  // set the first timer to move to the next song
   window.setTimeout( nextSong, 5000 );
-
-  // $current_song.length * 1000
-  // window.setTimeout( , $current_song.length * 1000 );
 });
 
 function displaySongs( songs ) {
-  var playedSongs = [];
+  // TODO -- preventing duplicates: var playedSongs = [];
 
   for( i = 0; i < songs.length; i++ ) {
-    playedSongs.push( songs[i].name );
+    // TODO -- preventing duplicates playedSongs.push( songs[i].name );
 
-    if ( i == 0) {
+    // display a special design for the first (current) song
+    if ( i == 0 )  {
       displaySpotifyWidget( songs[0].spotify_url );
-    } else {
+    }
+    // subsequent songs just get listed in ordinary form
+    else {
       $( '#playlist' ).append(
       '<li id=' + songs[i].spotify_url + ' data-length=' + songs[i].length + '>' + songs[i].name + ' by ' + songs[i].artist + '</li>');
     }
   }
 }
 
+// generates a Spotify Widget for the song at a given URL
 function displaySpotifyWidget( song_url ) {
   $( '#playlist' ).prepend(
     '<iframe src="' +
     'https://embed.spotify.com/?uri=' + song_url + '"' + 'width="300" height="80" frameborder="0" allowtransparency="true"></iframe>');
 }
 
+// updates the Spotify Widget with a new URL
 function updateSpotifyWidget( song_url ) {
   newURL = 'https://embed.spotify.com/?uri=' + song_url;
   $( 'li:first' ).attr( 'src', newURL );
 }
 
+// moves on to the next song and sets the next timer
 function nextSong() {
   // if there are more songs, play the next one
   if ( $( 'li' ).length > 0 ) {
@@ -52,6 +57,3 @@ function nextSong() {
   window.setTimeout( nextSong, 5000 );
 }
 
-// function debug() {
-//   debugger
-// }
