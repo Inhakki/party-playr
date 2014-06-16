@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   end
 
   def search
-    @room = Room.find params[:search_room]
+    @room = Room.find(params[:search_room])
     redirect_to @room
   end
 
