@@ -38,7 +38,7 @@ $( function() {
 
   function displaySong( song ) {
     $( '#playlist' ).append(
-      '<li>' + song.name + ' by ' + song.artist + '</li>');
+      "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
   }
 
   $( '#autocomplete-button' ).click( function( e ) {
