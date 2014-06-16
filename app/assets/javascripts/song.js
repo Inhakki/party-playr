@@ -2,27 +2,22 @@ $( function() {
   // store what room we're currently in for easy access
   var roomID = $( "h1:first" ).attr( "data-num" );
 
-  // make an ajax call to get our songs from the database
+  getSongList();
+  setUpSubmitButton();
+
+  // set the first timer to move to the next song
+  window.setTimeout( nextSong, 5000 );
+});
+
+// make an ajax call to get our songs from the database
+function getSongList() {
   $.ajax({
     url: "/rooms/" + roomID + "/songs",
     type: "get",
     dataType: "json",
     context: this
   }).then( displaySongs );
-
-  $( '#add-song' ).submit( function( e ) {
-    e.preventDefault();
-
-    var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
-
-    $.ajax({
-      url: "https://ws.spotify.com/search/1/track.json?q=" + query
-    }).then( processSong );
-});
-
-  // set the first timer to move to the next song
-  window.setTimeout( nextSong, 5000 );
-});
+}
 
 function displaySongs( songs ) {
   // TODO -- preventing duplicates: var playedSongs = [];
@@ -88,4 +83,15 @@ function processSong( res ) {
 function displaySong( song ) {
   $( '#playlist' ).append(
     "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
+}
+
+function setUpSubmitButton() {
+  $( '#add-song' ).submit( function( e ) {
+    e.preventDefault();
+
+    var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
+
+    $.ajax({
+      url: "https://ws.spotify.com/search/1/track.json?q=" + query
+    }).then( processSong );
 }

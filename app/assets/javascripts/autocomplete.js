@@ -3,44 +3,6 @@ $( function() {
   var last = "";
   var roomID = $( 'h1:first' ).attr( 'data-num' );
 
-  $( '#add-song' ).submit( function( e ) {
-    e.preventDefault();
-
-    var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
-
-    $.ajax({
-      url: "https://ws.spotify.com/search/1/track.json?q=" + query
-    }).then( processSong );
-  });
-
-  function processSong( res ) {
-    if ( $("#" + res.tracks[0].href.replace("spotify:track:", "")).length !== 0 ) {
-      alert("Song already exists!");
-      return;
-    }
-
-    $.ajax({
-      url: '/rooms/' + roomID + '/songs',
-      type: 'post',
-      dataType: 'json',
-      data: {
-        song: {
-          name: res.tracks[0].name,
-          artist: res.tracks[0].artists[0].name,
-          length: res.tracks[0].length,
-          spotify_url: res.tracks[0].href.replace("spotify:track:", ""),
-          room_id: roomID
-        }
-      },
-      context: this
-    }).then( displaySong );
-  }
-
-  function displaySong( song ) {
-    $( '#playlist' ).append(
-      "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
-  }
-
   $( '#autocomplete-button' ).click( function( e ) {
     if( $( '#song-title-query' ).val() != last) {
       songTitles = [];
