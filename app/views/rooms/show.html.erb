@@ -7,6 +7,9 @@
 </ul>
 
 <script>
-  // $current_song = $("li").first().text();
-  // location.replace($current_song);
+  $current_song = $("li").first().text();
+
+  if ($current_song != "") {
+    location.replace($current_song);
+  }
 </script>
