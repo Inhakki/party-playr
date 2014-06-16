@@ -10,6 +10,16 @@ $( function() {
     context: this
   }).then( displaySongs );
 
+  $( '#add-song' ).submit( function( e ) {
+    e.preventDefault();
+
+    var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
+
+    $.ajax({
+      url: "https://ws.spotify.com/search/1/track.json?q=" + query
+    }).then( processSong );
+});
+
   // set the first timer to move to the next song
   window.setTimeout( nextSong, 5000 );
 });
@@ -21,13 +31,13 @@ function displaySongs( songs ) {
     // TODO -- preventing duplicates playedSongs.push( songs[i].name );
 
     // display a special design for the first (current) song
-    if ( i == 0 )  {
+    if ( i === 0 )  {
       displaySpotifyWidget( songs[0].spotify_url );
     }
     // subsequent songs just get listed in ordinary form
     else {
       $( '#playlist' ).append(
-      '<li id=' + songs[i].spotify_url + ' data-length=' + songs[i].length + '>' + songs[i].name + ' by ' + songs[i].artist + '</li>');
+      "<li id=" + songs[i].spotify_url + " class='playlist-item'" + " data-length=" + songs[i].length + ">" + songs[i].name + " by " + songs[i].artist + "</li>");
     }
   }
 }
@@ -57,3 +67,25 @@ function nextSong() {
   window.setTimeout( nextSong, 50000 );
 }
 
+function processSong( res ) {
+  $.ajax({
+    url: '/rooms/' + roomID + '/songs',
+    type: 'post',
+    dataType: 'json',
+    data: {
+      song: {
+        name: res.tracks[0].name,
+        artist: res.tracks[0].artists[0].name,
+        length: res.tracks[0].length,
+        spotify_url: res.tracks[0].href,
+        room_id: roomID
+      }
+    },
+    context: this
+  }).then( displaySong );
+}
+
+function displaySong( song ) {
+  $( '#playlist' ).append(
+    "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
+}
