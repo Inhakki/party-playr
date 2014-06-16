@@ -1,9 +1,6 @@
 <h1 data-num='<%= @room.id %>'>Welcome to Room #<%= @room.id %></h1>
 
 <ul id="playlist">
-  <% @songs.each do |song| %>
-    <li><%= song.spotify_url %></li>
-  <% end %>
 </ul>
 
 <form id="add-song">
