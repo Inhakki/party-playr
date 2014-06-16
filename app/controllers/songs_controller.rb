@@ -1,5 +1,10 @@
 class SongsController < ApplicationController
 
+  def index
+    @songs = Song.where(room_id: params[:room_id]).order("upvotes DESC")
+    render json: @songs
+  end
+
   def new
 
   end
