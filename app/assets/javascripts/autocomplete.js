@@ -14,6 +14,11 @@ $( function() {
   });
 
   function processSong( res ) {
+    if ( $("#" + res.tracks[0].href.replace("spotify:track:", "")).length !== 0 ) {
+      alert("Song already exists!");
+      return;
+    }
+
     $.ajax({
       url: '/rooms/' + roomID + '/songs',
       type: 'post',
@@ -23,7 +28,7 @@ $( function() {
           name: res.tracks[0].name,
           artist: res.tracks[0].artists[0].name,
           length: res.tracks[0].length,
-          spotify_url: res.tracks[0].href,
+          spotify_url: res.tracks[0].href.replace("spotify:track:", ""),
           room_id: roomID
         }
       },

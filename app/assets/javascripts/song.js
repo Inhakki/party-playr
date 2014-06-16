@@ -36,7 +36,7 @@ function displaySongs( songs ) {
 function displaySpotifyWidget( song_url ) {
   $( '#playlist' ).prepend(
     '<iframe src="' +
-    'https://embed.spotify.com/?uri=' + song_url + '"' + 'width="300" height="80" frameborder="0" allowtransparency="true"></iframe>');
+    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="300" height="80" frameborder="0" allowtransparency="true"></iframe>');
 }
 
 // updates the Spotify Widget with a new URL
@@ -54,6 +54,6 @@ function nextSong() {
     $( 'li:first' ).remove();
   }
 
-  window.setTimeout( nextSong, 5000 );
+  window.setTimeout( nextSong, 50000 );
 }
 
