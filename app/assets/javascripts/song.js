@@ -12,7 +12,7 @@ function displaySongs( songs ) {
   var playedSongs = [];
 
   for( i=0; i < songs.length; i++ ) {
-    playedSongs.push( songs[i].name )
+    playedSongs.push( songs[i].name );
 
     $( '#playlist' ).append(
       '<li>' + songs[i].name + ' by ' + songs[i].artist +
@@ -20,5 +20,5 @@ function displaySongs( songs ) {
   }
 }
 
-  $current_song = $("li").first().text();
-}
+  var $current_song = $("li").first().text();
+});
