@@ -23,11 +23,11 @@ function displaySongs( songs ) {
     // subsequent songs just get listed in ordinary form
     else {
       var songTitle = (songs[i].name + " by " + songs[i].artist);
-      if (songTitle.length > 30) {
-        songTitle = songTitle.substring(0,27) + '...';
+      if (songTitle.length > 31) {
+        songTitle = songTitle.substring(0,28) + '...';
       }
       $( '#playlist' ).append(
-        "<li id=" + songs[i].spotify_url + " class='playlist-item'" + " data-length=" + songs[i].length + "><img src='http://placehold.it/40x40' class='album-art'><div class='song-title'>" + songTitle + "</div><img src='http://www.charbase.com/images/glyph/9651' class='vote'></li>");
+        "<li id=" + songs[i].spotify_url + " class='playlist-item'" + " data-length=" + songs[i].length + "><img src='http://placehold.it/40x40' class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>");
     }
 
   }
