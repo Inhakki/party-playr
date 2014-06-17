@@ -5,7 +5,6 @@ $( function() {
   setUpSubmitButton();
   setUpNextSongTimer();
   $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
-  nextSong2();
 });
 
 // make an ajax call to get our songs from the database
