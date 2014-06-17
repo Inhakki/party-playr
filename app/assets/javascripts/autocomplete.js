@@ -7,22 +7,32 @@ $( function() {
     source: function( request, response ) {
       var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
       $.ajax({
-        url: "https://ws.spotify.com/search/1/track.json?q=" + query,
+        url: "https://api.spotify.com/v1/search?q=" + query + "&type=track",
         dataType: "json",
 
         success: function( data ) {
-          response( $.map( data.tracks, function( track ) {
-            return { label: track.name, value: track.name, uri: track.spotify_url }
+          response( $.map( data.tracks.items, function( track ) {
+            return { label: track.name, value: track.name, sid: track.id }
           }));
         }
       });
     },
     minLength: 2,
     select: function( event, ui ) {
-      console.log( ui.item ?
-        "Selected: " + ui.item.uri :
-        "Nothing selected, input was " + this.value
-        );
+      if ( ui.item ) {
+        $( "#song-title-query" ).attr( 'data-sid' , ui.item.sid );
+        $( '#add-song' ).submit();
+      }
+
+      searchbox = $( '#song-title-query' );
+      searchbox.val( '' );
+      searchbox.attr( 'data-sid', '' );
+      return false;
+
+      // console.log( ui.item ?
+      //   "Selected: " +  ui.item.sid :
+      //   "Nothing selected, input was " + this.value
+      //   );
     },
     open: function() {
       $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
