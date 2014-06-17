@@ -34,7 +34,7 @@ function displaySongs( songs ) {
 function displaySpotifyWidget( song_url ) {
   $( '#playlist' ).prepend(
     '<iframe src="' +
-    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="300" height="80" frameborder="0" allowtransparency="true"></iframe>');
+    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true"></iframe>');
 }
 
 // updates the Spotify Widget with a new URL
