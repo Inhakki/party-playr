@@ -8,21 +8,6 @@ $( function() {
   nextSong2();
 });
 
-
-function nextSong2() {
-  $( '.music-paused' ).attrchange({
-  
-    trackValues: true,
-    callback: function( e ) {
-  debugger
-      console.log("test")
-      //function to play the first li in the current playlist
-      //first 'li' needs to be passed as an argument
-    }
-  });
-}
-
-
 // make an ajax call to get our songs from the database
 function getSongList() {
   $.ajax({
