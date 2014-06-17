@@ -82,7 +82,7 @@ function processSong( res ) {
 function displaySong( song ) {
   $( '#playlist' ).append(
     "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
-debugger
+
 }
 
 function setUpNextSongTimer() {
