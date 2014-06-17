@@ -56,12 +56,10 @@ function nextSong() {
 }
 
 function processSong( res ) {
-
   if ( res.tracks.items.length === 0 ) {
    alert( 'No results found!' );
    return;
   }
-
 
   var spotifyID = res.tracks.items[0].id;
 
@@ -90,20 +88,25 @@ function processSong( res ) {
 function displaySong( song ) {
   var songTitle = (song.name + " by " + song.artist);
 
-  if (songTitle.length > 30) {
+  if ( songTitle.length > 30 ) {
     songTitle = songTitle.substring(0,27) + '...';
   }
 
-  $( '#playlist' ).append(
+  if ( $( '#playlist' ).children().length === 0 ) {
+    // location.replace( 'spotify:track:' + song.spotify_url )
+    displaySpotifyWidget( song.spotify_url );
+  } else {
+    $( '#playlist' ).append(
     "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src='http://placehold.it/40x40' class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>");
+  }
 
-    song_length = song.length;
+  song_length = song.length;
 }
 
 function setUpNextSongTimer() {
-
-  window.setTimeout( nextSong, song_length );
-
+  if ( $( '#playlist' ).children().length > 0 ) {
+    window.setTimeout( nextSong, song_length );
+  }
 }
 
 function setUpSubmitButton() {
