@@ -14,11 +14,26 @@
  *= require_self
  */
 
+body {
+  font-family: 'Amatic SC';
+}
+
 .content {
   margin: 0 auto;
-  width: 500px;
+  width: 320px;
 }
 
 li {
+  border: 1px solid black;
   height: 1.8em;
+  list-style-type: none;
+  margin-bottom: 5px;
+  padding-top: 7px;
+  padding-bottom: 1.5px;
+  text-align: center;
 }
+
+ul {
+  padding: 0% 0%;
+}
+
