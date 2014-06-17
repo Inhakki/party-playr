@@ -83,7 +83,7 @@ function processSong( res ) {
         artist: res.tracks.items[0].artists[0].name,
         length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
-        room_id: $( 'h1:first' ).attr( 'data-num' )
+        // room_id: $( 'h1:first' ).attr( 'data-num' )
       }
     },
     context: this
@@ -122,6 +122,7 @@ function setUpSubmitButton() {
 
     searchbox.val( '' );
     searchbox.attr( 'data-sid', '' );
+
   });
 }
 

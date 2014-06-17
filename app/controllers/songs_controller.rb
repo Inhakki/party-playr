@@ -10,9 +10,8 @@ class SongsController < ApplicationController
   end
 
   def create
-    @song = Song.find_or_create_by(spotify_url: song_params[:spotify_url])
-    binding.pry
-
+    @song = Song.find_or_create_by(song_params)
+    Room.find(params[:room_id]).requests.create(song_id: @song.id)
 
     if @song.save
       # link the song to this room in the database
@@ -27,7 +26,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:name, :artist, :length, :spotify_url, :room_id)
+    params.require(:song).permit(:name, :artist, :length, :spotify_url)
   end
 
 end
