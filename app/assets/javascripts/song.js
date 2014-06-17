@@ -84,7 +84,7 @@ function displaySong( song ) {
 }
 
 function setUpNextSongTimer() {
-  window.setTimeout( nextSong, 8000 );
+  //window.setTimeout( nextSong, 8000 );
 }
 
 function setUpSubmitButton() {
