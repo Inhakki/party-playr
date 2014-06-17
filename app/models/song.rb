@@ -1,3 +1,4 @@
 class Song < ActiveRecord::Base
-  belongs_to :room
+  has_many :requests
+  has_many :rooms, through: :requests
 end
