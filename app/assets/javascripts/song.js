@@ -4,8 +4,20 @@ $( function() {
   getSongList();
   setUpSubmitButton();
   setUpNextSongTimer();
+
+  // set up the background video, default to Norah Jones
+  videoId = '-bAJM3vGl5M';
+
   $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
+
+
+  // $( '.clickable' ).click();
+
 });
+
+// function debug() {
+
+// }
 
 // make an ajax call to get our songs from the database
 function getSongList() {
@@ -32,6 +44,8 @@ function displaySongs( songs ) {
 
 // generates a Spotify Widget for the song at a given URL
 function displaySpotifyWidget( song_url ) {
+  getCurrentSongInfoForBackground( song_url );
+  // debugger
   $( '#playlist' ).prepend(
     '<iframe src="' +
     'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true"></iframe>');
@@ -158,4 +172,44 @@ function processTrackGet( resTrack ) {
     },
     context: this
   }).then( displaySong );
+}
+
+function getCurrentSongInfoForBackground( spotifyID ) {
+  $.ajax({
+        url: "https://api.spotify.com/v1/tracks/" + spotifyID,
+      type: 'get',
+      dataType: 'json',
+      context: this
+    }).then( getBackgroundImageURL );
+}
+
+function getBackgroundImageURL( res ) {
+  name = res.name;
+  artist = res.artists[0].name;
+  query = escape( name ) + "+" + escape( artist ) + "+live";
+  url = "https://gdata.youtube.com/feeds/api/videos?q=" + query + "&alt=json";
+
+  $.ajax({
+    url: url,
+    type: 'get',
+    dataType: 'json',
+    context: this
+  }).then( changeBackgroundImageURL );
+}
+
+function changeBackgroundImageURL( res ) {
+  path = res.feed.entry[0].id.$t;
+  id = path.substring( path.indexOf( '/videos/' ) + 8 );
+  replaceBackgroundByID( id );
+}
+
+function replaceBackgroundByID( youtubeID ) {
+  player = $( '#tubular-player' );
+  oldSRC = player.attr( 'src' );
+
+  front = oldSRC.substring( 0, oldSRC.indexOf( '/embed/' ) + 7);
+  back = oldSRC.substring( oldSRC.indexOf( '?' ) );
+
+  newSRC = front + youtubeID + back
+  player.attr( 'src', newSRC );
 }

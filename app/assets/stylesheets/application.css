@@ -87,6 +87,10 @@ h2 {
   font-size: 42px;
 }
 
+#tubular-player {
+  webkit-filter: grayscale(100%);
+}
+
 ul {
   padding: 0% 0%;
 }
