@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-room = Room.create
-room.songs.create(name: "Halo", artist: "Beyonce", length: 261.085, spotify_url: "spotify:track:4JehYebiI9JE8sR8MisGVb")
-room.songs.create(name: "Get Lucky", artist: "Daft Punk", length: 369.626, spotify_url: "spotify:track:69kOkLUCkxIZYexIgSG8rq")
+# room = Room.create
+# room.songs.create(name: "Halo", artist: "Beyonce", length: 261.085, spotify_url: "4JehYebiI9JE8sR8MisGVb")
+# room.songs.create(name: "Get Lucky", artist: "Daft Punk", length: 369.626, spotify_url: "69kOkLUCkxIZYexIgSG8rq")

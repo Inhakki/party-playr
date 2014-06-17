@@ -4,10 +4,12 @@ class CreateSongs < ActiveRecord::Migration
       t.string :name, null: false
       t.string :artist, null: false
       t.float :length, null: false
-      t.integer :upvotes, default: 1
       t.text :spotify_url, null: false
-      t.references :room, null: false, index: true
+      t.text :album_art
+
       t.timestamps
     end
+
+      add_index :songs, :spotify_url, unique: true
   end
 end
