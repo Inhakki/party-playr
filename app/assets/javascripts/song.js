@@ -92,12 +92,17 @@ function displaySong( song ) {
     songTitle = songTitle.substring(0,27) + '...';
   }
 
+
+  $( '#playlist' ).append(
+    "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
+
+
   $( '#playlist' ).append(
     "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src='http://placehold.it/40x40' class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>");
 }
 
 function setUpNextSongTimer() {
-  // window.setTimeout( nextSong, 8000 );
+  window.setTimeout( nextSong, 8000000 );
 }
 
 function setUpSubmitButton() {
