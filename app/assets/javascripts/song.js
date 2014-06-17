@@ -1,8 +1,9 @@
+var song_length;
+
 $( function() {
   getSongList();
   setUpSubmitButton();
   setUpNextSongTimer();
-
   $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
 });
 
@@ -61,6 +62,7 @@ function processSong( res ) {
    return;
   }
 
+
   var spotifyID = res.tracks.items[0].id;
 
   if ( $( '#' + spotifyID ).length !== 0 ) {
@@ -94,10 +96,14 @@ function displaySong( song ) {
 
   $( '#playlist' ).append(
     "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src='http://placehold.it/40x40' class='album-art'><div class='song-title'>" + songTitle + "</div><img src='http://www.charbase.com/images/glyph/9651' class='vote'></li>");
+
+    song_length = song.length;
 }
 
 function setUpNextSongTimer() {
-  // window.setTimeout( nextSong, 8000 );
+
+  window.setTimeout( nextSong, song_length );
+
 }
 
 function setUpSubmitButton() {
