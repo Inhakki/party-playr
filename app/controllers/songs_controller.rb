@@ -10,8 +10,10 @@ class SongsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @song = Song.new(song_params)
+    @song = Song.find_or_create_by(spotify_url: song_params[:spotify_url])
+    # binding.pry
+
 
     if @song.save
       # link the song to this room in the database
