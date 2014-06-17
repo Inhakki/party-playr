@@ -19,19 +19,20 @@ body {
 }
 
 .content {
-  margin: 0 auto;
+  background-color: rgba(174, 167, 167, 0.7);
   width: 320px;
 }
 
 li {
   border: 1px solid black;
-  height: 1.8em;
+  font-size: 50px;
+  height: 75px;
   list-style-type: none;
   margin-bottom: 5px;
-  padding-top: 7px;
-  padding-bottom: 1.5px;
-  text-align: center;
+  padding: 30px 30px;
+
 }
+
 
 ul {
   padding: 0% 0%;
