@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
 
   def index
+    # binding.pr
     @songs = Room.find(params[:room_id]).songs
     render json: @songs
   end

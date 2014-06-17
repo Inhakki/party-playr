@@ -1,11 +1,14 @@
 <h1>Party Playr</h1>
 
-<%= form_tag(rooms_path, method: :create) do %>
-  <%= submit_tag("Get a party started") %>
-<% end %>
-
+<h2>Get a party started!</h2>
+  <%= form_tag(rooms_path, method: :create) do %>
+    <%= image_submit_tag("create_button.png") %>
+  <% end %>
+<h2>Join a party!</h2>
 <%= form_tag(room_search_path, method: :post) do %>
   <%= text_field_tag(:search_room) %>
-  <%= submit_tag("Find your party!") %>
+  <%= image_submit_tag("join_button.png") %>
 <% end %>
+
+
 
