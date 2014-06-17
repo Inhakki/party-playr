@@ -14,12 +14,18 @@ TODAY'S PARTY PLAYER!
 
 <h4>Team Members</h4>
 <li><b>Brett Wallace</b> - [@](bwallace90@gmail.com)</li>
+
 <li><b>JoElla Straley</b> - [@](jstraley@gmail.com)</li>
+
 <li><b>Alexi Phillipson</b> - [@](alexi83@gmail.com)</li>
+
 <li><b>Jacob Cain</b> - [@](jcain3389@yahoo.com)</li>
+
 <li><b>Stephen Stanwood</b> - [@](stephen@stanwoodsolutions.com)
 </li>
+
 <li><b>Jon Eva</b> - [@](jonathoneva@gmail.com)</li>
+
 <li><b>Parker Hart</b> - [@](parkerhart@gmail.com)</li>
 
 
@@ -27,7 +33,7 @@ TODAY'S PARTY PLAYER!
 
 <h4>Overview</h4>
 
-<b>PLAYR</b> is a dynamic web application that implements the power of ``Spotify`` and the love of your friends. Through <b>PLAYR</b> a user or host has the ability to create a "room" that will simply be a music playlist that allows other users to join, through an invite code, and vote on what song they wish to be played next. Fellow friends will be able to search and add songs through <b>PLAYR</b> as well as vote on the next song to be played. By way of our superb coding, we have enabled a host to engage party guests through a simple and easy to use application that allows users to pick the music they wish to hear! The application has no minimum requirements and is avaliable to the public. 
+<b>PLAYR</b> is a dynamic web application that implements the power of ``Spotify`` and the love of your friends. Through <b>PLAYR</b> a user or host has the ability to create a "room" that will simply be a music playlist that allows other users to join, through an invite code and vote on what song they wish to be played next. Fellow friends will be able to search and add songs through <b>PLAYR</b> as well as vote on the next song to be played. By way of superb coding, we have enabled a host to engage party guests through a simple and easy to use application that allows users to pick the music they wish to hear! The application has no minimum requirements and is avaliable to the public. 
 
 <h4>Technologies Used</h4>
 
