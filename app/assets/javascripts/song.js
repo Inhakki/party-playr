@@ -1,10 +1,28 @@
 $( function() {
   getSongList();
   setUpSubmitButton();
+
   setUpNextSongTimer();
 
   $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
+
+  // setUpNextSongTimer();
+  nextSong2;
+
 });
+
+
+function nextSong2() {
+  $( '#engageView' ).attrchange({
+    trackValues: true,
+    callback: function( e ) {
+      console.log("test")
+      //function to play the first li in the current playlist
+      //first 'li' needs to be passed as an argument
+    }
+  });
+}
+
 
 // make an ajax call to get our songs from the database
 function getSongList() {
@@ -60,6 +78,7 @@ function processSong( res ) {
    alert( 'No results found!' );
    return;
   }
+
 
   var spotifyID = res.tracks.items[0].id;
 
