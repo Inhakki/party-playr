@@ -45,9 +45,9 @@ function updateSpotifyWidget( song_url ) {
 function nextSong() {
   // if there are more songs, play the next one
   if ( $( 'li' ).length > 0 ) {
-    $( 'iframe:first' ).remove();
+    $( '#playlist iframe:first' ).remove();
     displaySpotifyWidget( $( 'li:first' ).attr( 'id' ) );
-    $( 'li:first' ).remove();
+    $( '#playlist li:first' ).remove();
   }
 
   setUpNextSongTimer();
