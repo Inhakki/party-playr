@@ -13,7 +13,7 @@ $( function() {
         success: function( data ) {
           response( $.map( data.tracks.items, function( track ) {
             return { label: track.name, value: track.name, sid: track.id }
-          }));
+          }).slice( 0, 5 ));
         }
       });
     },
