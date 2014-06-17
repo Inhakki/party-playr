@@ -54,7 +54,8 @@ function nextSong() {
 }
 
 function processSong( res ) {
-  var spotifyID = res.tracks[0].href.replace("spotify:track:", "");
+
+  var spotifyID = res.tracks.items[0].id;
 
   if ( $( '#' + spotifyID ).length !== 0 ) {
      alert( 'Song already exists!' );
@@ -67,9 +68,9 @@ function processSong( res ) {
     dataType: 'json',
     data: {
       song: {
-        name: res.tracks[0].name,
-        artist: res.tracks[0].artists[0].name,
-        length: res.tracks[0].length,
+        name: res.tracks.items[0].name,
+        artist: res.tracks.items[0].artists[0].name,
+        length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
         room_id: $( 'h1:first' ).attr( 'data-num' )
       }
@@ -81,6 +82,7 @@ function processSong( res ) {
 function displaySong( song ) {
   $( '#playlist' ).append(
     "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + ">" + song.name + " by " + song.artist + "</li>");
+debugger
 }
 
 function setUpNextSongTimer() {
@@ -94,7 +96,8 @@ function setUpSubmitButton() {
     var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
 
     $.ajax({
-      url: "https://ws.spotify.com/search/1/track.json?q=" + query
+      // url: "https://ws.spotify.com/search/1/track.json?q=" + query 
+      url: "https://api.spotify.com/v1/search?q=" + query + "&type=track"
     }).then( processSong );
   });
 }
