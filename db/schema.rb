@@ -34,16 +34,15 @@ ActiveRecord::Schema.define(version: 20140617140202) do
   end
 
   create_table "songs", force: true do |t|
-    t.string   "name",                    null: false
-    t.string   "artist",                  null: false
-    t.float    "length",                  null: false
-    t.integer  "upvotes",     default: 1
-    t.text     "spotify_url",             null: false
-    t.integer  "room_id",                 null: false
+    t.string   "name",        null: false
+    t.string   "artist",      null: false
+    t.float    "length",      null: false
+    t.text     "spotify_url", null: false
+    t.text     "album_art"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "songs", ["room_id"], name: "index_songs_on_room_id", using: :btree
+  add_index "songs", ["spotify_url"], name: "index_songs_on_spotify_url", unique: true, using: :btree
 
 end
