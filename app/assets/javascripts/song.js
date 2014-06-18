@@ -47,7 +47,6 @@ function displaySongs( response ) {
 // generates a Spotify Widget for the song at a given URL
 function displaySpotifyWidget( song_url ) {
   getCurrentSongInfoForBackground( song_url );
-  // debugger
   $( '#playlist' ).prepend(
     '<iframe src="' +
     'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true"></iframe>');
@@ -93,7 +92,7 @@ function processSong( res ) {
         artist: res.tracks.items[0].artists[0].name,
         length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
-        album_art: res.tracks.items[0].album.images[0].url
+        album_art: res.album.images[0].url
       }
     },
     context: this
@@ -158,6 +157,7 @@ function processTrackGet( resTrack ) {
      return;
   }
 
+
   $.ajax({
     url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
     type: 'post',
@@ -168,13 +168,12 @@ function processTrackGet( resTrack ) {
         artist: resTrack.artists[0].name,
         length: resTrack.duration_ms,
         spotify_url: spotifyID,
-        album_art: resTrack.items[0].album.images[0].url
+        album_art: resTrack.album.images[0].url
       }
     },
     context: this
   }).then( displaySong );
 }
-
 function getCurrentSongInfoForBackground( spotifyID ) {
   $.ajax({
         url: "https://api.spotify.com/v1/tracks/" + spotifyID,
