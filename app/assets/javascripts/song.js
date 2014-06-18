@@ -93,7 +93,7 @@ function processSong( res ) {
         artist: res.tracks.items[0].artists[0].name,
         length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
-        album_art: res.album.images[1].url
+        album_art: res.tracks.items[0].album.images[1]
       }
     },
     context: this
