@@ -1,13 +1,13 @@
 class RoomsController < ApplicationController
 
   def show
-    @room = Room.find(params[:id])
+    @room = Room.find_by(key: params[:key])
     @songs = @room.songs
   end
 
   def create
     @room = Room.create
-    redirect_to @room
+    redirect_to "/rooms/#{@room.key}"
   end
 
   def search
