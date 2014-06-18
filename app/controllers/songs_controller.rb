@@ -1,15 +1,5 @@
 class SongsController < ApplicationController
 
-  def index
-    # binding.pr
-    @songs = Room.find(params[:room_id]).songs
-    render json: @songs
-  end
-
-  def new
-
-  end
-
   def create
     @song = Song.find_or_create_by(song_params)
     Room.find(params[:room_id]).requests.create(song_id: @song.id)

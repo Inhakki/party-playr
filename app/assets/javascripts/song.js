@@ -23,22 +23,22 @@ $( function() {
 // make an ajax call to get our songs from the database
 function getSongList() {
   $.ajax({
-    url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/songs",
+    url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/playlist",
     type: "get",
     dataType: "json",
     context: this
   }).then( displaySongs );
 }
 
-function displaySongs( songs ) {
-  for( i = 0; i < songs.length; i++ ) {
+function displaySongs( response ) {
+  for( i = 0; i < response["requests"].length; i++ ) {
     // display a special design for the first (current) song
     if ( i === 0 )  {
-      displaySpotifyWidget( songs[0].spotify_url );
+      displaySpotifyWidget( response["requests"][0].song.spotify_url );
     }
     // subsequent songs just get listed in ordinary form
     else {
-      displaySong( songs[i] );
+      displaySong( response["requests"][i].song );
     }
   }
 }
@@ -93,7 +93,6 @@ function processSong( res ) {
         length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
         album_art: res.tracks.items[0].album.images[0].url
-        // room_id: $( 'h1:first' ).attr( 'data-num' )
       }
     },
     context: this
@@ -169,7 +168,6 @@ function processTrackGet( resTrack ) {
         length: resTrack.duration_ms,
         spotify_url: spotifyID,
         album_art: resTrack.items[0].album.images[0].url
-        //room_id: $( 'h1:first' ).attr( 'data-num' )
       }
     },
     context: this

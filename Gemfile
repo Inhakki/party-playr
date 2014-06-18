@@ -55,3 +55,4 @@ gem 'rails_12factor', group: :production
 # gem 'debugger', group: [:development, :test]
 
 gem 'pry'
+gem "active_model_serializers"

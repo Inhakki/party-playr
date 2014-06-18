@@ -1,8 +1,8 @@
 class CreateRequests < ActiveRecord::Migration
   def change
-    create_join_table :songs, :rooms, table_name: :requests do |t|
-      t.index :song_id
-      t.index :room_id
+    create_table :requests do |t|
+      t.references :song
+      t.references :room
 
       t.boolean :played, default: false
       t.integer :upvotes, default: 1
