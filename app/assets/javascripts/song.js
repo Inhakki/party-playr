@@ -61,7 +61,7 @@ function updateSpotifyWidget( song_url ) {
 // moves on to the next song and sets the next timer
 function nextSong() {
   // if there are more songs, play the next one
-  if ( $( 'li' ).length > 1 ) {
+  if ( nextSongExists() ) {
     $( '#playlist iframe:first' ).remove();
     displaySpotifyWidget( $( 'li:first' ).attr( 'id' ) );
     $( '#playlist li:first' ).remove();
@@ -119,7 +119,7 @@ function displaySong( song ) {
 }
 
 function setUpNextSongTimer() {
-  if ( $( '#playlist' ).children().length > 0 ) {
+  if ( nextSongExists() ) {
     window.setTimeout( nextSong, song_length );
   }
 }
@@ -221,4 +221,9 @@ function setUpSkipButton() {
       nextSong();
     }
   });
+}
+
+// indicates whether there is a next song queued up
+function nextSongExists() {
+  return $( '#playlist' ).children().length > 1;
 }
