@@ -92,7 +92,7 @@ function processSong( res ) {
         artist: res.tracks.items[0].artists[0].name,
         length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
-        album_art: res.album.images[0].url
+        album_art: res.album.images[1].url
       }
     },
     context: this
@@ -168,7 +168,7 @@ function processTrackGet( resTrack ) {
         artist: resTrack.artists[0].name,
         length: resTrack.duration_ms,
         spotify_url: spotifyID,
-        album_art: resTrack.album.images[0].url
+        album_art: resTrack.album.images[1].url
       }
     },
     context: this

@@ -2,7 +2,7 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.find_or_create_by(song_params)
-    Room.find(params[:room_id]).requests.create(song_id: @song.id)
+    Room.find_by(key: params[:room_id]).requests.create(song_id: @song.id)
 
     if @song.save
       # link the song to this room in the database
