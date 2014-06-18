@@ -205,14 +205,10 @@ function changeBackgroundImageURL( res ) {
 }
 
 function replaceBackgroundByID( youtubeID ) {
-  player = $( '#tubular-player' );
-  oldSRC = player.attr( 'src' );
-
-  front = oldSRC.substring( 0, oldSRC.indexOf( '/embed/' ) + 7);
-  back = oldSRC.substring( oldSRC.indexOf( '?' ) );
-
-  newSRC = front + youtubeID + back
-  player.attr( 'src', newSRC );
+  fn = function() {
+    player.loadVideoById( {'videoId': youtubeID } );
+  }
+  window.setTimeout( fn, 2000 );
 }
 
 function setUpSkipButton() {
