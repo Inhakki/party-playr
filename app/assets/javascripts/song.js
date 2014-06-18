@@ -8,13 +8,13 @@ $( function() {
 
   // set up the background video, default to Norah Jones
   videoId = '-bAJM3vGl5M';
-
-  $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
-
-
+  //media query: if screen is at least this large, play video
+  if (window.matchMedia("screen and (min-width: 450px)").matches) {
+    $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
+  };
   // $( '.clickable' ).click();
-
 });
+
 
 // function debug() {
 

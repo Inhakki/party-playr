@@ -124,3 +124,11 @@ ul {
 /*#already-played-songs li {
   vertical-align: middle;
 }*/
+
+/*chrome needs a media query rule in the CSS as well as JS in order to work, even if the rule is empty (as below)
+*/
+@media screen and (min-width:450px) {
+    .mobile {
+
+  }
+}
