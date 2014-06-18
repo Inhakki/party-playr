@@ -82,6 +82,7 @@ function processSong( res ) {
      alert( 'Song already exists!' );
      return;
   }
+
   $.ajax({
     url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
     type: 'post',
