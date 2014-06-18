@@ -12,7 +12,7 @@ $( document ).ready(function() {
 
         success: function( data ) {
           response( $.map( data.tracks.items, function( track ) {
-            return { label: track.name, value: track.name, sid: track.id }
+            return { label: track.name + "(" + track.artist + ")", value: track.name, sid: track.id }
           }).slice( 0, 5 ));
         }
       });
