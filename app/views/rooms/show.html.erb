@@ -1,6 +1,6 @@
-<h1 data-num='<%= @room.id %>'>Welcome to Room #<%= @room.id %></h1>
-
-
+<button data-text-swap="Show" data-text-original="Hide" class="move" >Hide</button>
+<div class="slide-out-div">
+  <h1 data-num='<%= @room.id %>'>Welcome to Room #<%= @room.id %></h1>
 
 <!--  <a href="#" class="tubular-volume-up">Volume Up</a> | <a href="#" class="tubular-volume-down">Volume Down</a> | -->
 
@@ -10,18 +10,20 @@
 
 <div id="video-controls" class="black-65"><a href="#" class="tubular-play">Play Video</a> | <a href="#" class="tubular-pause">Pause Video</a> | <a href="#" class="tubular-mute">Video Sound</a> | <a href="#" id="skip-button">Skip!</a></div>
 
+  <button id="skip-button" type="button">Skip!</button>
 
+  <ul id="playlist">
+  </ul>
 
-<ul id="playlist">
-</ul>
-
-  <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
-  <h2 id="graveyard">Click To See Past Songs</h2>
-    <ul id="already-played-songs">
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-    </ul>
-
+    <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
+    <div id="played-songs">
+      <h2 id="graveyard">Click To See Past Songs</h2>
+        <ul id="already-played-songs">
+          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
+          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
+          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
+          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
+          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
+        </ul>
+    </div>
+</div>

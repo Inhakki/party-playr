@@ -14,14 +14,17 @@
  *= require_self
  */
 
+
 #already-played-songs {
   display: none;
+  list-style-type: none;
 }
 
 body {
   font-family: 'Amatic SC';
   margin: 0px;
 }
+
 
 .content {
   background-color: rgba(174, 167, 167, 0.7);
@@ -32,8 +35,9 @@ body {
   width: 320px;
 }
 
-h1 {
-  font-size: 50px;
+h1.home {
+  font-size: 70px;
+  margin: 2px 2px;
   text-align: center;
   margin: 0px;
 }
@@ -59,7 +63,18 @@ h2 {
   text-decoration: none;
 }
 
-#skip-button {
+#new-song-prompt {
+  font-size: 42px;
+}
+
+.move {
+  background-color: black;
+  border-style: none;
+  font-family: 'Amatic SC';
+  font-size: 30px;
+  color: white;
+  padding: 20px 20px;
+  width: 320px;
 }
 
 .playlist-item {
@@ -98,16 +113,13 @@ h2 {
   width: 50px;
 }
 
+
+
 #song-title-query {
   margin-bottom: 10px;
   margin-top: 10px;
   font-size: 24px;
 }
-
-#new-song-prompt {
-  font-size: 42px;
-}
-
 #tubular-player {
   webkit-filter: grayscale(100%);
 }
@@ -138,9 +150,6 @@ ul {
   cursor: pointer;
 }
 
-#already-played-songs {
-  list-style-type: none;
-}
 
 /*#already-played-songs li {
   vertical-align: middle;
