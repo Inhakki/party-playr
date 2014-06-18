@@ -1,4 +1,4 @@
-$( function() {
+$( document ).ready(function() {
   // var songTitles;
   // var last = "";
   // var roomID = $( 'h1:first' ).attr( 'data-num' );

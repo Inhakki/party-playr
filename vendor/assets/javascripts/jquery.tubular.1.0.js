@@ -108,7 +108,6 @@
             e.preventDefault();
             player.playVideo();
         }).on('click', '.' + options.pauseButtonClass, function(e) { // pause button
-            debugger
             e.preventDefault();
             player.pauseVideo();
         }).on('click', '.' + options.muteButtonClass, function(e) { // mute button
@@ -134,7 +133,7 @@
     tag.src = "//www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-// debugger
+
     // create plugin
 
     $.fn.tubular = function (options) {

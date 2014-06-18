@@ -1,6 +1,7 @@
-var song_length;
+$( document ).ready( function() {
+  var song_length;
 
-$( function() {
+  // $.noConflict();
   getSongList();
   setUpSubmitButton();
   setUpNextSongTimer();
@@ -221,6 +222,10 @@ function setUpSkipButton() {
     }
   });
 }
+
+// function setUpMuteButton() {
+//   $('#content').tubular( { mute: false } );
+// }
 
 // indicates whether there is a next song queued up
 function nextSongExists() {
