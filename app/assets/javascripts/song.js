@@ -4,6 +4,7 @@ $( function() {
   getSongList();
   setUpSubmitButton();
   setUpNextSongTimer();
+  setUpSkipButton();
 
   // set up the background video, default to Norah Jones
   videoId = '-bAJM3vGl5M';
@@ -212,4 +213,8 @@ function replaceBackgroundByID( youtubeID ) {
 
   newSRC = front + youtubeID + back
   player.attr( 'src', newSRC );
+}
+
+function setUpSkipButton() {
+  $( '#skip-button' ).click( nextSong );
 }
