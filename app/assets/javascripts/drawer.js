@@ -1,4 +1,4 @@
-$( function() {
+$( '.rooms.show' ).ready(function() {
       var scroll_to = $("#already-played-songs").offset().top + $("#already-played-songs").height() + 200;
 
     $( "#graveyard" ).on("click", function() {
