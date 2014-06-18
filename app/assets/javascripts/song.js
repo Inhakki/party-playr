@@ -82,7 +82,6 @@ function processSong( res ) {
      alert( 'Song already exists!' );
      return;
   }
-
   $.ajax({
     url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
     type: 'post',
@@ -93,7 +92,7 @@ function processSong( res ) {
         artist: res.tracks.items[0].artists[0].name,
         length: res.tracks.items[0].duration_ms,
         spotify_url: spotifyID,
-        album_art: tracks.items[0].album.images[0].url
+        album_art: res.tracks.items[0].album.images[0].url
         // room_id: $( 'h1:first' ).attr( 'data-num' )
       }
     },
@@ -169,8 +168,8 @@ function processTrackGet( resTrack ) {
         artist: resTrack.artists[0].name,
         length: resTrack.duration_ms,
         spotify_url: spotifyID,
-        album_art: tracks.items[0].album.images[0].url
-        room_id: $( 'h1:first' ).attr( 'data-num' )
+        album_art: resTrack.items[0].album.images[0].url
+        //room_id: $( 'h1:first' ).attr( 'data-num' )
       }
     },
     context: this
