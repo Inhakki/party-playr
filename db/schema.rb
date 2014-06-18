@@ -11,23 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617140202) do
+ActiveRecord::Schema.define(version: 20140618192927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "requests", force: true do |t|
-    t.integer  "song_id"
-    t.integer  "room_id"
+  create_table "requests", id: false, force: true do |t|
+    t.integer  "song_id",                    null: false
+    t.integer  "room_id",                    null: false
     t.boolean  "played",     default: false
     t.integer  "upvotes",    default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "requests", ["room_id"], name: "index_requests_on_room_id", using: :btree
+  add_index "requests", ["song_id"], name: "index_requests_on_song_id", using: :btree
+
   create_table "rooms", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key"
   end
 
   create_table "songs", force: true do |t|
