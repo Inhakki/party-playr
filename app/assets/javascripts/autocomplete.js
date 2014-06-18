@@ -1,47 +1,4 @@
-$( document ).ready(function() {
-  // var songTitles;
-  // var last = "";
-  // var roomID = $( 'h1:first' ).attr( 'data-num' );
 
-  $( "#song-title-query" ).autocomplete({
-    source: function( request, response ) {
-      var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
-      $.ajax({
-        url: "https://api.spotify.com/v1/search?q=" + query + "&type=track",
-        dataType: "json",
-
-        success: function( data ) {
-          response( $.map( data.tracks.items, function( track ) {
-            return { label: track.name + "(" + track.artist + ")", value: track.name, sid: track.id }
-          }).slice( 0, 5 ));
-        }
-      });
-    },
-    minLength: 2,
-    select: function( event, ui ) {
-      if ( ui.item ) {
-        $( "#song-title-query" ).attr( 'data-sid' , ui.item.sid );
-        $( '#add-song' ).submit();
-      }
-
-      searchbox = $( '#song-title-query' );
-      searchbox.val( '' );
-      searchbox.attr( 'data-sid', '' );
-      return false;
-
-      // console.log( ui.item ?
-      //   "Selected: " +  ui.item.sid :
-      //   "Nothing selected, input was " + this.value
-      //   );
-    },
-    open: function() {
-      $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-    },
-    close: function() {
-      $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-    }
-  });
-});
 
 
 //   $( '#autocomplete-button' ).click( function( e ) {

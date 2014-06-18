@@ -48,6 +48,14 @@ h2 {
   text-align: center;
 }
 
+.dropdown-song {
+  font-size: larger;
+}
+
+.dropdown-artist {
+  color: #C0C0C0;
+}
+
 #video-controls {
   border: 0px;
   font-size: 24px;
@@ -130,6 +138,7 @@ ul {
 
 .ui-autocomplete {
 /*  back: ;ground-color: rgba(20, 110, 181,0.8);*/
+  font-family: Georgia;
   list-style-type: none;
   width: 260px;
   z-index: 100;
@@ -144,6 +153,14 @@ ul {
   padding: 10px;
   padding-bottom: 5px;
 
+}
+
+.ui-menu-item:hover {
+  background-color: black;
+}
+
+.ui-helper-hidden-accessible {
+  color: white;
 }
 
 .ui-menu-item:hover {

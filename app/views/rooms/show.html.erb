@@ -10,20 +10,72 @@
 
 <div id="video-controls" class="black-65"><a href="#" class="tubular-play">Play Video</a> | <a href="#" class="tubular-pause">Pause Video</a> | <a href="#" class="tubular-mute">Video Sound</a> | <a href="#" id="skip-button">Skip!</a></div>
 
-  <button id="skip-button" type="button">Skip!</button>
+<ul id="playlist">
+</ul>
 
-  <ul id="playlist">
-  </ul>
+  <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
+  <h2 id="graveyard">Click To See Past Songs</h2>
+    <ul id="already-played-songs">
+      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+    </ul>
 
-    <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
-    <div id="played-songs">
-      <h2 id="graveyard">Click To See Past Songs</h2>
-        <ul id="already-played-songs">
-          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
-          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
-          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
-          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
-          <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div></li>
-        </ul>
-    </div>
-</div>
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      $( document ).ready(function() {
+  // var songTitles;
+  // var last = "";
+  // var roomID = $( 'h1:first' ).attr( 'data-num' );
+
+  $( "#song-title-query" ).autocomplete({
+    source: function( request, response ) {
+      var query = $( '#song-title-query' ).val().split( ' ' ).join( '+' );
+      $.ajax({
+        url: "https://api.spotify.com/v1/search?q=" + query + "&type=track",
+        dataType: "json",
+
+        success: function( data ) {
+
+          response( $.map( data.tracks.items, function( track ) {
+
+            return { label: track.name, artist: track.artists[0].name, value: track.name, sid: track.id }
+          }).slice( 0, 5 ));
+        }
+      });
+    },
+    minLength: 2,
+    select: function( event, ui ) {
+      if ( ui.item ) {
+        $( "#song-title-query" ).attr( 'data-sid' , ui.item.sid );
+        $( '#add-song' ).submit();
+      }
+
+      searchbox = $( '#song-title-query' );
+      searchbox.val( '' );
+      searchbox.attr( 'data-sid', '' );
+      return false;
+
+      // console.log( ui.item ?
+      //   "Selected: " +  ui.item.sid :
+      //   "Nothing selected, input was " + this.value
+      //   );
+    },
+    open: function() {
+      $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+    },
+    close: function() {
+      $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+    }
+  }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .append( "<a><span class='dropdown-song'>" + item.label + "</span><br><span class='dropdown-artist'>" + item.artist + "</span></a>" )
+        .appendTo( ul );
+    };
+});
+    });
+  </script>
+<% end %>
