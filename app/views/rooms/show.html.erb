@@ -1,33 +1,34 @@
 
-<button data-text-swap="Show" data-text-original="Hide" class="move" >Hide</button>
-<div class="slide-out-div">
-<h1 data-num='<%= @room.key %>'>Welcome to Room #<%= @room.key %></h1>
+<div class="mobile move-div">
+  <button data-text-swap="Show" data-text-original="Hide" class="move" >Hide</button>
+</div>
+  <div class="slide-out-div">
+    <h1 data-num='<%= @room.key %>'>Welcome to Room #<%= @room.key %></h1>
 
+  <!--  <a href="#" class="tubular-volume-up">Volume Up</a> | <a href="#" class="tubular-volume-down">Volume Down</a> | -->
 
+  <form id="add-song">
+    <input id="song-title-query" autofocus data-sid="" placeholder="I want to hear..." type="text">
+  </form>
 
-<!--  <a href="#" class="tubular-volume-up">Volume Up</a> | <a href="#" class="tubular-volume-down">Volume Down</a> | -->
+  <div id="video-controls" class="black-65"><a href="#" class="tubular-play">Play Video</a> | <a href="#" class="tubular-pause">Pause Video</a> | <a href="#" class="tubular-mute">Video Sound</a> | <a href="#" id="skip-button">Skip!</a></div>
 
-<form id="add-song">
-  <input id="song-title-query" autofocus data-sid="" placeholder="I want to hear..." type="text">
-</form>
+  <ul id="playlist">
+  </ul>
 
-<div id="video-controls" class="black-65"><a href="#" class="tubular-play">Play Video</a> | <a href="#" class="tubular-pause">Pause Video</a> | <a href="#" class="tubular-mute">Video Sound</a> | <a href="#" id="skip-button">Skip!</a></div>
+    <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
+    <h2 id="graveyard">Click To See Past Songs</h2>
+      <ul id="already-played-songs">
+        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
+      </ul>
 
-<ul id="playlist">
-</ul>
+  <% content_for :head do %>
+    <script type="text/javascript">
 
-  <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
-  <h2 id="graveyard">Click To See Past Songs</h2>
-    <ul id="already-played-songs">
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-      <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-    </ul>
+    </script>
+  <% end %>
 
-<% content_for :head do %>
-  <script type="text/javascript">
-
-  </script>
-<% end %>

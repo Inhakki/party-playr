@@ -10,10 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require_tree
  *= require_self
  */
 
+.album-art {
+  width: 40px;
+}
 
 #already-played-songs {
   display: none;
@@ -27,25 +30,11 @@ body {
 
 
 .content {
-  background-color: rgba(174, 167, 167, 0.7);
   padding: 15px;
   margin-left: 0px;
   margin-top: 0px;
   text-align: center;
   width: 320px;
-}
-
-h1.home {
-  font-size: 70px;
-  margin: 2px 2px;
-  text-align: center;
-  margin: 0px;
-}
-
-h2 {
-  font-size: 40px;
-  margin: 3px 3px;
-  text-align: center;
 }
 
 .dropdown-song {
@@ -56,23 +45,22 @@ h2 {
   color: #C0C0C0;
 }
 
-#video-controls {
-  border: 0px;
-  font-size: 24px;
-  font-weight: bold;
+h1.home {
+  font-size: 70px;
+  margin: 2px 2px;
+  text-align: center;
   margin: 0px;
-  margin-bottom: 10px;
-  z-index: 150;
 }
 
-#video-controls a {
-  color: white;
-  font-weight: normal;
-  text-decoration: none;
+.slide-out-div h1 {
+  margin: 0;
 }
 
-#new-song-prompt {
-  font-size: 42px;
+
+h2 {
+  font-size: 40px;
+  margin: 3px 3px;
+  text-align: center;
 }
 
 .move {
@@ -83,6 +71,14 @@ h2 {
   color: white;
   padding: 20px 20px;
   width: 320px;
+}
+
+.move-div {
+    background-color: rgba(174, 167, 167, 0.7);
+}
+
+#new-song-prompt {
+  font-size: 42px;
 }
 
 .playlist-item {
@@ -121,7 +117,9 @@ h2 {
   width: 50px;
 }
 
-
+.slide-out-div {
+  background-color: rgba(174, 167, 167, 0.7);
+}
 
 #song-title-query {
   margin-bottom: 10px;
@@ -130,10 +128,6 @@ h2 {
 }
 #tubular-player {
   webkit-filter: grayscale(100%);
-}
-
-button {
-  outline: none;
 }
 
 ul {
@@ -171,6 +165,20 @@ ul {
   cursor: pointer;
 }
 
+#video-controls {
+  border: 0px;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: 10px;
+  z-index: 150;
+}
+
+#video-controls a {
+  color: white;
+  font-weight: normal;
+  text-decoration: none;
+}
 
 /*#already-played-songs li {
   vertical-align: middle;
@@ -179,7 +187,7 @@ ul {
 /*chrome needs a media query rule in the CSS as well as JS in order to work, even if the rule is empty (as below)
 */
 @media screen and (min-width:450px) {
-    .mobile {
-
+  .mobile {
+    display: none;
   }
 }

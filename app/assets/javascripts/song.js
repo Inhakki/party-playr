@@ -112,7 +112,7 @@ function displaySong( song ) {
     displaySpotifyWidget( song.spotify_url );
   } else {
     $( '#playlist' ).append(
-    "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src='http://placehold.it/40x40' class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>");
+    "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>");
   }
 
   song_length = song.length;

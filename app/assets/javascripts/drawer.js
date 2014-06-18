@@ -10,7 +10,7 @@ $( '.rooms.show' ).ready(function() {
 
   $('.move').on('click', function(){
     var el = $(this);
-    $('.slide-out-div').toggle('slide', {direction: 'left'}, 200);
+    $('.slide-out-div').toggle('slide', {direction: 'left'}, 400);
     el.text() == el.data("text-swap") ? el.text(el.data("text-original")) : el.text(el.data("text-swap"));
   });
 
