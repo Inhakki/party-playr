@@ -23,9 +23,13 @@ $( '.rooms.show' ).ready( function() {
   setUpSubmitButton();
   setUpSkipButton();
   window.setTimeout( activateFirstSong, 2000 );
+  hidePlayButton();
   mobileFormat();
   turnOffFormEnter();
 
+  function hidePlayButton() {
+    $( '.tubular-play' ).hide();
+  }
 
   function mobileFormat() {
     if ( !window.matchMedia( 'screen and (min-width: 450px)' ).matches ) {

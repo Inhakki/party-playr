@@ -106,13 +106,23 @@
 
         $('body').on('click','.' + options.playButtonClass, function(e) { // play button
             e.preventDefault();
+            $( '.tubular-play' ).hide();
+            $( '.tubular-pause' ).show();
             player.playVideo();
         }).on('click', '.' + options.pauseButtonClass, function(e) { // pause button
             e.preventDefault();
+            $( '.tubular-pause' ).hide();
+            $( '.tubular-play' ).show();
             player.pauseVideo();
         }).on('click', '.' + options.muteButtonClass, function(e) { // mute button
             e.preventDefault();
-            (player.isMuted()) ? player.unMute() : player.mute();
+            if ( player.isMuted() ) {
+                player.unMute();
+                $( '.tubular-mute' ).text( 'Turn Video Sound Off' );
+            } else {
+                player.mute();
+                $( '.tubular-mute' ).text( 'Turn Video Sound On' );
+            }
         }).on('click', '.' + options.volumeDownClass, function(e) { // volume down button
             e.preventDefault();
             var currentVolume = player.getVolume();
