@@ -73,7 +73,8 @@ h2 {
   float: right;
   font-family: 'Amatic SC';
   font-size: 30px;
-  width: 320px;
+  position: fixed; top: 0; left: 0;
+  width: 325px;
 }
 
 .move-div {
@@ -125,7 +126,9 @@ h2 {
   background-color: rgba(174, 167, 167, 0.7);
   float: left;
   height: 100%;
+  margin-top: 20px;
   padding: 15px;
+  position: fixed; left: 0;
 }
 
 #song-title-query {

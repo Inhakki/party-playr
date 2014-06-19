@@ -2,7 +2,6 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find_by(key: params[:key])
-
   end
 
   def create
