@@ -260,5 +260,3 @@ $( '.rooms.show' ).ready( function() {
     return ( songLengths.length > 1 );
   }
 });
-
-
