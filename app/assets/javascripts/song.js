@@ -12,6 +12,12 @@ $( '.rooms.show' ).ready( function() {
   var songTimer;
   var songLengths = [];
 
+  var refreshFunction = function() {
+    refreshSongs();
+    refreshHistory();
+  }
+  var refreshTimer = window.setInterval(refreshFunction, 5000)
+
   getSongList();
   getHistory();
   setUpSubmitButton();
@@ -19,6 +25,7 @@ $( '.rooms.show' ).ready( function() {
   window.setTimeout( activateFirstSong, 2000 );
   mobileFormat();
   turnOffFormEnter();
+
 
   function mobileFormat() {
     if ( !window.matchMedia( 'screen and (min-width: 450px)' ).matches ) {
