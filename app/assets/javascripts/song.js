@@ -4,7 +4,7 @@ $( document ).ready( function() {
 
   //media query: if screen is at least this large, play video
   if (window.matchMedia("screen and (min-width: 450px)").matches) {
-    $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
+    $( '#content' ).tubular( {videoId: '-bAJM3vGl5M'} );
   }
 });
 
@@ -17,6 +17,17 @@ $( '.rooms.show' ).ready( function() {
   setUpSubmitButton();
   setUpSkipButton();
   window.setTimeout( activateFirstSong, 2000 );
+  mobileFormat();
+  turnOffFormEnter();
+
+  function mobileFormat() {
+    if ( !window.matchMedia( 'screen and (min-width: 450px)' ).matches ) {
+      $( '#content' ).css( 'margin', '0px' );
+      $( '#content' ).css( 'padding', '0px' );
+      $( '#content' ).css( 'width', '100%' );
+      $( '.slide-out-div' ).css( 'margin-top', '0px' );
+    }
+  }
 
   function bindUpVote( votes ) {
     votes.on( 'click', function() {
@@ -27,6 +38,16 @@ $( '.rooms.show' ).ready( function() {
         dataType: 'json'
         //don't need to send any data...just love-tapping controller
       });
+    });
+  }
+
+  function turnOffFormEnter() {
+    $( '#add-song' ).bind( 'keyup keypress' , function( e ) {
+      var code = e.keyCode || e.which;
+      if (code === 13) {
+        e.preventDefault();
+        return false;
+      }
     });
   }
 
@@ -96,7 +117,7 @@ $( '.rooms.show' ).ready( function() {
       songLengths.push( response["requests"][i].song.length );
     }
 
-    bindUpVote( $('.vote') );
+    bindUpVote( $( '.vote' ) );
   }
 
   function refreshHistorySongs( response ) {
@@ -136,6 +157,8 @@ $( '.rooms.show' ).ready( function() {
 
   // moves on to the next song and sets the next timer
   function nextSong() {
+    if ( !window.matchMedia( 'screen and (min-width: 450px)' ).matches ) return;
+
     if ( $( '#playlist li:first' ).length === 0 ) return;
 
     $.ajax({
@@ -163,9 +186,11 @@ $( '.rooms.show' ).ready( function() {
     sid = $( '#playlist li:first' ).attr( 'id' );
 
     // play the song, update the background, set the next timer
-    $( '#open' ).attr( 'src', "spotify:track:" + sid );
-    getCurrentSongInfoForBackground( sid );
-    setUpNextSongTimer();
+    if ( window.matchMedia( 'screen and (min-width: 450px)' ).matches ) {
+      $( '#open' ).attr( 'src', "spotify:track:" + sid );
+      getCurrentSongInfoForBackground( sid );
+      setUpNextSongTimer();
+    }
   }
 
   function processSong( res ) {
