@@ -13,6 +13,7 @@ $( '.rooms.show' ).ready( function() {
   var songLengths = [];
 
   getSongList();
+  getHistory();
   setUpSubmitButton();
   setUpSkipButton();
   window.setTimeout( activateFirstSong, 2000 );
@@ -27,6 +28,15 @@ $( '.rooms.show' ).ready( function() {
     }).then( displaySongs );
   }
 
+  function getHistory() {
+    $.ajax({
+      url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/history",
+      type: "get",
+      dataType: "json",
+      context: this
+    }).then( displayHistory );
+  }
+
   function displaySongs( response ) {
     for( i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
@@ -37,11 +47,17 @@ $( '.rooms.show' ).ready( function() {
     }
   }
 
+  function displayHistory( response ) {
+     for( i = 0, n = response["requests"].length; i < n; i++ ) {
+      // add the song to the list
+      displayPlayedSong( response["requests"][i].song );
+    }
+  }
+
   // moves on to the next song and sets the next timer
   function nextSong() {
     // if there are more songs, play the next one
     if ( nextSongExists() ) {
-      debugger
       $( '#playlist' ).children().first().remove();
       songLengths.shift();
       activateFirstSong();
@@ -53,8 +69,8 @@ $( '.rooms.show' ).ready( function() {
     sid = $( '#playlist li:first' ).attr( 'id' );
 
     // play the song, update the background, set the next timer
-    // $( '#open' ).attr( 'src', "spotify:track:" + sid );
-    // getCurrentSongInfoForBackground( sid );
+    $( '#open' ).attr( 'src', "spotify:track:" + sid );
+    getCurrentSongInfoForBackground( sid );
     setUpNextSongTimer();
   }
 
@@ -97,9 +113,22 @@ $( '.rooms.show' ).ready( function() {
       songTitle = songTitle.substring(0,27) + '...';
     }
 
-    listItemHTML = "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>";
+    var listItemHTML = "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>";
 
     $( '#playlist' ).append( listItemHTML );
+  }
+
+  function displayPlayedSong( song ) {
+    var songTitle = (song.name + " by " + song.artist);
+
+    // cut the title down to size if necessary
+    if ( songTitle.length > 30 ) {
+      songTitle = songTitle.substring(0,27) + '...';
+    }
+
+    var listItemHTML = "<li class='playlist-item'><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</li>";
+
+    $( '#already-played-songs' ).append( listItemHTML );
   }
 
   function setUpNextSongTimer() {
@@ -180,9 +209,11 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function changeBackgroundImageURL( res ) {
-    path = res.feed.entry[0].id.$t;
-    id = path.substring( path.indexOf( '/videos/' ) + 8 );
-    replaceBackgroundByID( id );
+    if ( res.feed.entry ) {
+      path = res.feed.entry[0].id.$t;
+      id = path.substring( path.indexOf( '/videos/' ) + 8 );
+      replaceBackgroundByID( id );
+    }
   }
 
   function replaceBackgroundByID( youtubeID ) {
