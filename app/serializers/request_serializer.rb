@@ -1,5 +1,5 @@
 class RequestSerializer < ActiveModel::Serializer
-  attributes :played, :upvotes
+  attributes :id, :played, :upvotes
   has_one :song
 
 end

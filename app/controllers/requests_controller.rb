@@ -10,7 +10,18 @@ class RequestsController < ApplicationController
   end
 
   def update
+    @request = Request.find(params[:id])
+    if @request.update(request_params)
+      render status: 200, nothing: true
+    else
+      render status: 400, nothing: true
+    end
+  end
 
+  private
+
+  def request_params
+    params.require(:request).permit(:played)
   end
 
 end
