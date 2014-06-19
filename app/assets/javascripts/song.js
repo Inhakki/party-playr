@@ -40,7 +40,7 @@ $( '.rooms.show' ).ready( function() {
   function displaySongs( response ) {
     for( i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
-      displaySong( response["requests"][i].song );
+      displaySong( response["requests"][i].song,  response["requests"][i].id );
 
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
@@ -56,6 +56,13 @@ $( '.rooms.show' ).ready( function() {
 
   // moves on to the next song and sets the next timer
   function nextSong() {
+    $.ajax({
+      url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/requests/' + $( '#playlist li:first' ).attr( 'data-request'),
+      type: 'patch',
+      dataType: 'json',
+      data: {request: {played: true}}
+     });
+
     // if there are more songs, play the next one
     if ( nextSongExists() ) {
       $( '#playlist' ).children().first().remove();
@@ -105,7 +112,7 @@ $( '.rooms.show' ).ready( function() {
     }).then( displaySong );
   }
 
-  function displaySong( song ) {
+  function displaySong( song, requestID ) {
     var songTitle = (song.name + " by " + song.artist);
 
     // cut the title down to size if necessary
@@ -113,7 +120,7 @@ $( '.rooms.show' ).ready( function() {
       songTitle = songTitle.substring(0,27) + '...';
     }
 
-    var listItemHTML = "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>";
+    var listItemHTML = "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + " + data-request=" + requestID + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>";
 
     $( '#playlist' ).append( listItemHTML );
   }
