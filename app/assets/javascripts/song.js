@@ -49,9 +49,11 @@ function displaySpotifyWidget( song_url ) {
   getCurrentSongInfoForBackground( song_url );
   $( '#playlist' ).prepend(
     '<iframe src="' +
-    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true"></iframe>');
-  $('#open').attr('src', "spotify:track:" + song_url);
+    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true" class="mobile-hide"></iframe>');
+    $('#open').attr('src', "spotify:track:" + song_url);
 }
+
+
 
 // moves on to the next song and sets the next timer
 function nextSong() {
