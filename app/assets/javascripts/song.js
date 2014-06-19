@@ -1,10 +1,9 @@
 $( document ).ready( function() {
-  var song_length;
+  var songTimer;
 
   // $.noConflict();
   getSongList();
   setUpSubmitButton();
-  setUpNextSongTimer();
   setUpSkipButton();
 
   // set up the background video, default to Norah Jones
@@ -36,6 +35,7 @@ function displaySongs( response ) {
     // display a special design for the first (current) song
     if ( i === 0 )  {
       displaySpotifyWidget( response["requests"][0].song.spotify_url );
+      setUpNextSongTimer( response["requests"][0].song.length );
     }
     // subsequent songs just get listed in ordinary form
     else {
@@ -50,12 +50,7 @@ function displaySpotifyWidget( song_url ) {
   $( '#playlist' ).prepend(
     '<iframe src="' +
     'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true"></iframe>');
-}
-
-// updates the Spotify Widget with a new URL
-function updateSpotifyWidget( song_url ) {
-  newURL = 'https://embed.spotify.com/?uri=spotify:track:' + song_url;
-  $( 'li:first' ).attr( 'src', newURL );
+  $('#open').attr('src', "spotify:track:" + song_url);
 }
 
 // moves on to the next song and sets the next timer
@@ -66,8 +61,6 @@ function nextSong() {
     displaySpotifyWidget( $( 'li:first' ).attr( 'id' ) );
     $( '#playlist li:first' ).remove();
   }
-
-  setUpNextSongTimer();
 }
 
 function processSong( res ) {
@@ -118,9 +111,9 @@ function displaySong( song ) {
   song_length = song.length;
 }
 
-function setUpNextSongTimer() {
+function setUpNextSongTimer(length) {
   if ( nextSongExists() ) {
-    window.setTimeout( nextSong, song_length );
+    songTimer = window.setTimeout( nextSong, 5000 );
   }
 }
 
