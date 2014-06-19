@@ -1,5 +1,5 @@
 $( '.rooms.show' ).ready(function() {
-      var scroll_to = $("#already-played-songs").offset().top + $("#already-played-songs").height() + 200;
+      var scroll_to = $("#already-played-songs").offset().top + $("#already-played-songs").height();
 
     $( "#graveyard" ).on("click", function() {
       $( "#already-played-songs" ).slideToggle();
