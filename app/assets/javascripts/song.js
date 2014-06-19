@@ -16,7 +16,7 @@ $( '.rooms.show' ).ready( function() {
     refreshSongs();
     refreshHistory();
   }
-  var refreshTimer = window.setInterval(refreshFunction, 5000)
+  var refreshTimer = window.setInterval( refreshFunction, 5000);
 
   getSongList();
   getHistory();
