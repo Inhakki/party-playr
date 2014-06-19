@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/rooms/:key" => "rooms#show"
   patch "/rooms/:key/requests/:id" => "requests#update"
   put "/rooms/:key/requests/:id" => "requests#update"
+  post "/requests/upvote/:id" => "requests#upvote"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

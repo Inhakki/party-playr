@@ -19,6 +19,13 @@ class RequestsController < ApplicationController
     end
   end
 
+  def upvote
+    @request = Request.find(params[:id])
+    @request.upvotes += 1
+    @request.save
+    render json: @request
+  end
+
   private
 
   def request_params
