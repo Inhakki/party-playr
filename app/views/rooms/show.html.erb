@@ -1,8 +1,8 @@
-
-<div class="mobile move-div">
-  <button data-text-swap="Show" data-text-original="Hide" class="move" >Hide</button>
+<div class="mobile-hide move-div">
+    <button data-text-swap="Show Menu" data-text-original="Hide Menu" class="move" >Hide Menu</button>
 </div>
-  <div class="slide-out-div">
+<div class="slide-out-div">
+
     <h1 data-num='<%= @room.key %>'>Welcome to Room #<%= @room.key %></h1>
 
   <!--  <a href="#" class="tubular-volume-up">Volume Up</a> | <a href="#" class="tubular-volume-down">Volume Down</a> | -->
@@ -11,20 +11,22 @@
     <input id="song-title-query" autofocus data-sid="" placeholder="I want to hear..." type="text">
   </form>
 
-  <div id="video-controls" class="black-65"><a href="#" class="tubular-play">Play Video</a> | <a href="#" class="tubular-pause">Pause Video</a> | <a href="#" class="tubular-mute">Video Sound</a> | <a href="#" id="skip-button">Skip!</a></div>
-
   <ul id="playlist">
   </ul>
 
+  <div id="video-controls" class="black-65 mobile-hide">
+    <a href="#" class="tubular-play">Play Video</a> |
+    <a href="#" class="tubular-pause">Pause Video</a> |
+    <a href="#" class="tubular-mute">Video Sound</a> |
+    <a href="#" id="skip-button">Skip!</a>
+  </div>
     <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
     <h2 id="graveyard">Click To See Past Songs</h2>
       <ul id="already-played-songs">
-        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
-        <li class="playlist-item"><img src="http://placehold.it/40x40" class="album-art"><div class="song-title">Whatever</div><div class="vote">+1</div></li>
       </ul>
+  </div>
+
+
 
     <!--   hidden iframe to play music -->
       <iframe id="open" style="display: none;"></iframe>

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   post "room_search" => "rooms#search"
   get "/rooms/:key" => "rooms#show"
+  patch "/rooms/:key/requests/:id" => "requests#update"
+  put "/rooms/:key/requests/:id" => "requests#update"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -14,13 +16,14 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-     resources :rooms, only: [:create, :show] do
+    resources :rooms, only: [:create] do
       resources :songs, only: [:new, :create]
-      resources :requests, only: [:update]
       get "playlist" => "requests#playlist"
       get "history" => "requests#history"
     end
 
+  # default show -- keep this down here to avoid duplicate issues
+  get "/rooms/:key" => "rooms#show"
 
   # Example resource route with options:
   #   resources :products do

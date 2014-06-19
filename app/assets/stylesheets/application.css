@@ -30,9 +30,7 @@ body {
 
 
 .content {
-  padding: 15px;
-  margin-left: 0px;
-  margin-top: 0px;
+  padding: 25px;
   text-align: center;
   width: 320px;
 }
@@ -63,23 +61,30 @@ h2 {
   text-align: center;
 }
 
+.home-content {
+    background-color: rgba(174, 167, 167, 0.7);
+
+}
+
 .move {
   background-color: black;
   border-style: none;
+  color: white;
+  float: right;
   font-family: 'Amatic SC';
   font-size: 30px;
-  color: white;
-  padding: 20px 20px;
-  width: 320px;
+  position: fixed; top: 0; left: 0;
+  width: 325px;
 }
 
 .move-div {
-    background-color: rgba(174, 167, 167, 0.7);
+  background-color: rgba(174, 167, 167, 0.7);
 }
 
 #new-song-prompt {
   font-size: 42px;
 }
+
 
 .playlist-item {
   background-color: grey;
@@ -119,6 +124,11 @@ h2 {
 
 .slide-out-div {
   background-color: rgba(174, 167, 167, 0.7);
+  float: left;
+  height: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  position: fixed; left: 0;
 }
 
 #song-title-query {
@@ -158,7 +168,7 @@ ul {
 }
 
 .ui-helper-hidden-accessible {
-  color: white;
+  display: none;
 }
 
 .ui-menu-item:hover {
@@ -184,10 +194,14 @@ ul {
   vertical-align: middle;
 }*/
 
+.mobile-hide {
+  display: none;
+}
+
 /*chrome needs a media query rule in the CSS as well as JS in order to work, even if the rule is empty (as below)
 */
 @media screen and (min-width:450px) {
-  .mobile {
-    display: none;
+  .mobile-hide {
+    display: inline;
   }
 }

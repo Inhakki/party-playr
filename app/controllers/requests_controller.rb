@@ -7,10 +7,22 @@ class RequestsController < ApplicationController
 
   def history
     @requests = Room.find_by(key: params[:room_id]).requests.where(played: true).order(updated_at: :desc)
+    render json: @requests
   end
 
   def update
+    @request = Request.find(params[:id])
+    if @request.update(request_params)
+      render status: 200, nothing: true
+    else
+      render status: 400, nothing: true
+    end
+  end
 
+  private
+
+  def request_params
+    params.require(:request).permit(:played)
   end
 
 end
