@@ -3,7 +3,7 @@
 TODAY'S PARTY PLAYER! 
 
 ```````
-<a href="http://tinypic.com?ref=14wez6b" target="_blank"><img src="http://i58.tinypic.com/14wez6b.jpg" border="0" alt="PLAYR" style="width: 100px;"></a>
+<a href="http://tinypic.com?ref=14wez6b" target="_blank"><img src="https://s3.amazonaws.com/uploads.hipchat.com/39979/759889/cvGy3w3QyB3iUcO/Player-Logo-bk-01.png" border="0" alt="PLAYR" style="width: 200px;"></a>
 
 [pplayr.com](http://www.pplayr.co)
  
