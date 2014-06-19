@@ -1,7 +1,7 @@
 $( document ).ready( function() {
   // set up the background video, default to Norah Jones
   videoId = '-bAJM3vGl5M';
-  
+
   //media query: if screen is at least this large, play video
   if (window.matchMedia("screen and (min-width: 450px)").matches) {
     $('#content').tubular( {videoId: '-bAJM3vGl5M'} );
@@ -11,7 +11,7 @@ $( document ).ready( function() {
 $( '.rooms.show' ).ready( function() {
   var songTimer;
   var songLengths = [];
-  
+
   getSongList();
   getHistory();
   setUpSubmitButton();
@@ -42,6 +42,54 @@ $( '.rooms.show' ).ready( function() {
     }).then( displaySongs );
   }
 
+  function refreshSongs() {
+    $.ajax({
+      url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/playlist",
+      type: "get",
+      dataType: "json",
+      context: this
+    }).then( refreshPlaylist );
+  }
+
+  function refreshSongsIncludingFirst() {
+    $.ajax({
+      url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/playlist",
+      type: "get",
+      dataType: "json",
+      context: this
+    }).then( refreshPlaylistIncludingFirst );
+  }
+
+  function refreshPlaylistIncludingFirst( response ) {
+    for( var i = 0, n = response["requests"].length; i < n; i++ ) {
+      // add the song to the list
+      displaySong( response["requests"][i].song,  response["requests"][i].id );
+
+      // save the length of each song
+      songLengths.push( response["requests"][i].song.length );
+    }
+
+    activateFirstSong();
+  };
+
+  function refreshPlaylist( response ) {
+    var toDelete = $( '#playlist li:not(:first)' );
+
+    var nowPlayingLength = songLengths[0];
+    songLengths = [];
+    songLengths.push( nowPlayingLength );
+
+    toDelete.remove();
+
+    for( var i = 1, n = response["requests"].length; i < n; i++ ) {
+      // add the song to the list
+      displaySong( response["requests"][i].song,  response["requests"][i].id );
+
+      // save the length of each song
+      songLengths.push( response["requests"][i].song.length );
+    }
+  }
+
   function getHistory() {
     $.ajax({
       url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/history",
@@ -54,7 +102,7 @@ $( '.rooms.show' ).ready( function() {
   function displaySongs( response ) {
     for( i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
-      
+
       displaySong( response["requests"][i].song,  response["requests"][i].id );
       var $votes = $('.vote')
       bindUpVote($votes);
@@ -72,6 +120,8 @@ $( '.rooms.show' ).ready( function() {
 
   // moves on to the next song and sets the next timer
   function nextSong() {
+    if ( $( '#playlist li:first' ).length === 0 ) return;
+
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/requests/' + $( '#playlist li:first' ).attr( 'data-request'),
       type: 'patch',
@@ -88,6 +138,8 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function activateFirstSong() {
+    if ( $( '#playlist li:first' ).length === 0 ) return;
+
     // get the spotify id for the first song
     sid = $( '#playlist li:first' ).attr( 'id' );
 
@@ -111,6 +163,9 @@ $( '.rooms.show' ).ready( function() {
        return;
     }
 
+    // if we're adding the first song, we have to display the list rather than refresh
+    var fn = nextSongExists() ? refreshSongs : refreshSongsIncludingFirst;
+
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
       type: 'post',
@@ -125,7 +180,7 @@ $( '.rooms.show' ).ready( function() {
         }
       },
       context: this
-    }).then( displaySong );
+    }).then( fn );
   }
 
   function displaySong( song, requestID ) {
@@ -136,11 +191,11 @@ $( '.rooms.show' ).ready( function() {
       songTitle = songTitle.substring(0,27) + '...';
     }
 
-    var listItemHTML = "<li id=" + song.spotify_url + 
-    " class='playlist-item'" + " data-length=" + 
-    song.length + " + data-request=" + requestID + 
-    "><img src=" + song.album_art + 
-    " class='album-art'><div class='song-title'>" + songTitle + 
+    var listItemHTML = "<li id=" + song.spotify_url +
+    " class='playlist-item'" + " data-length=" +
+    song.length + " + data-request=" + requestID +
+    "><img src=" + song.album_art +
+    " class='album-art'><div class='song-title'>" + songTitle +
     "</div><div class='vote'>+1</div></li>";
 
     $( '#playlist' ).append( listItemHTML );
@@ -197,6 +252,9 @@ $( '.rooms.show' ).ready( function() {
        return;
     }
 
+    // if we're adding the first song, we have to display the list rather than refresh
+    var fn = nextSongExists() ? refreshSongs : refreshSongsIncludingFirst;
+
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
       type: 'post',
@@ -211,15 +269,16 @@ $( '.rooms.show' ).ready( function() {
         }
       },
       context: this
-    }).then( displaySong );
+    }).then( fn );
   }
+
   function getCurrentSongInfoForBackground( spotifyID ) {
     $.ajax({
           url: "https://api.spotify.com/v1/tracks/" + spotifyID,
         type: 'get',
         dataType: 'json',
         context: this
-      }).then( getBackgroundImageURL );
+    }).then( getBackgroundImageURL );
   }
 
   function getBackgroundImageURL( res ) {
