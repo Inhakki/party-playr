@@ -7,6 +7,7 @@ class RequestsController < ApplicationController
 
   def history
     @requests = Room.find_by(key: params[:room_id]).requests.where(played: true).order(updated_at: :desc)
+    render json: @requests
   end
 
   def update
