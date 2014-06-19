@@ -49,6 +49,15 @@ $( '.rooms.show' ).ready( function() {
     }).then( refreshPlaylist );
   }
 
+  function refreshHistory() {
+    $.ajax({
+      url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/history",
+      type: "get",
+      dataType: "json",
+      context: this
+    }).then( refreshHistorySongs );
+  }
+
   function refreshSongsIncludingFirst() {
     $.ajax({
       url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/playlist",
@@ -88,6 +97,13 @@ $( '.rooms.show' ).ready( function() {
     }
 
     bindUpVote( $('.vote') );
+  }
+
+  function refreshHistorySongs( response ) {
+    for( var i = 0, n = response["requests"].length; i < n; i++ ) {
+      // add the song to the list
+      displayPlayedSong( response["requests"][i].song,  response["requests"][i].id );
+    }
   }
 
   function getHistory() {
@@ -134,6 +150,9 @@ $( '.rooms.show' ).ready( function() {
       $( '#playlist' ).children().first().remove();
       songLengths.shift();
       activateFirstSong();
+
+      refreshSongs();
+      refreshHistory();
     }
   }
 
@@ -163,9 +182,6 @@ $( '.rooms.show' ).ready( function() {
        return;
     }
 
-    // if we're adding the first song, we have to display the list rather than refresh
-    var fn = nextSongExists() ? refreshSongs : refreshSongsIncludingFirst;
-
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
       type: 'post',
@@ -180,7 +196,15 @@ $( '.rooms.show' ).ready( function() {
         }
       },
       context: this
-    }).then( fn );
+    }).then( function () {
+      if ( noSongsExist() ) {
+        refreshSongs();
+        refreshHistory();
+      } else {
+        refreshSongsIncludingFirst();
+        // refreshHistoryIncludingFirst();
+      }
+    });
   }
 
   function displaySong( song, requestID ) {
@@ -253,7 +277,7 @@ $( '.rooms.show' ).ready( function() {
     }
 
     // if we're adding the first song, we have to display the list rather than refresh
-    var fn = nextSongExists() ? refreshSongs : refreshSongsIncludingFirst;
+    var fn = noSongsExist() ? refreshSongs : refreshSongsIncludingFirst;
 
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
@@ -317,5 +341,10 @@ $( '.rooms.show' ).ready( function() {
   // indicates whether there is a next song queued up
   function nextSongExists() {
     return ( songLengths.length > 1 );
+  }
+
+  // indicates whether there is a next song queued up
+  function noSongsExist() {
+    return ( songLengths.length > 0 );
   }
 });
