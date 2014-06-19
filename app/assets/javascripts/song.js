@@ -19,15 +19,13 @@ $( '.rooms.show' ).ready( function() {
   window.setTimeout( activateFirstSong, 2000 );
 
   function bindUpVote( votes ) {
-    votes.on('click', function() {
-      var $request = $(this).parent();
+    votes.on( 'click', function() {
+      var $request = $( this ).parent();
       $.ajax({
         url: '/requests/upvote/' + $request.attr( 'data-request'),
         type: 'post',
         dataType: 'json'
         //don't need to send any data...just love-tapping controller
-      }).then(function(response) {
-        console.log(response);
       });
     });
   }
@@ -88,6 +86,8 @@ $( '.rooms.show' ).ready( function() {
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
     }
+
+    bindUpVote( $('.vote') );
   }
 
   function getHistory() {
@@ -100,19 +100,19 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function displaySongs( response ) {
-    for( i = 0, n = response["requests"].length; i < n; i++ ) {
+    for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
 
       displaySong( response["requests"][i].song,  response["requests"][i].id );
-      var $votes = $('.vote')
-      bindUpVote($votes);
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
     }
+
+    bindUpVote( $('.vote') );
   }
 
   function displayHistory( response ) {
-     for( i = 0, n = response["requests"].length; i < n; i++ ) {
+     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
       displayPlayedSong( response["requests"][i].song );
     }

@@ -43,6 +43,7 @@ body {
 }
 
 .dropdown-song {
+  color: white;
   font-size: larger;
 }
 
@@ -110,7 +111,6 @@ h2 {
   font-size: 42px;
 }
 
-
 .playlist-item {
   background-color: grey;
   border: 1px solid black;
@@ -146,6 +146,12 @@ h2 {
   text-align: center;
   width: 50px;
 }
+
+.playlist-item .vote:hover {
+  background: black;
+  cursor: pointer;
+}
+
 
 .slide-out-div {
   background-color: rgba(174, 167, 167, 0.7);
