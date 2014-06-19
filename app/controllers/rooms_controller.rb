@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
   end
 
   def search
-    @room = Room.find_by(key: params[:search_room])
+    @room = Room.find_by(key: params[:search_room].upcase)
     redirect_to "/rooms/#{@room.key}"
   end
 
