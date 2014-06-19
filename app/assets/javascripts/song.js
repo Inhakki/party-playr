@@ -1,11 +1,7 @@
+var songTimer;
+var upcomingSongLengths = [];
+
 $( document ).ready( function() {
-  var songTimer;
-
-  // $.noConflict();
-  getSongList();
-  setUpSubmitButton();
-  setUpSkipButton();
-
   // set up the background video, default to Norah Jones
   videoId = '-bAJM3vGl5M';
   //media query: if screen is at least this large, play video
@@ -15,6 +11,12 @@ $( document ).ready( function() {
   // $( '.clickable' ).click();
 });
 
+$( '.rooms.show' ).ready( function() {
+  // $.noConflict();
+  getSongList();
+  setUpSubmitButton();
+  setUpSkipButton();
+});
 
 // function debug() {
 
@@ -32,25 +34,33 @@ function getSongList() {
 
 function displaySongs( response ) {
   for( i = 0; i < response["requests"].length; i++ ) {
+
+    upcomingSongLengths.push( response["requests"][i].song.length );
+console.log( "added song length" + response["requests"][i].song.length );
+
     // display a special design for the first (current) song
     if ( i === 0 )  {
       displaySpotifyWidget( response["requests"][0].song.spotify_url );
-      setUpNextSongTimer( response["requests"][0].song.length );
     }
     // subsequent songs just get listed in ordinary form
     else {
       displaySong( response["requests"][i].song );
     }
   }
+
+  setUpNextSongTimer();
 }
 
 // generates a Spotify Widget for the song at a given URL
 function displaySpotifyWidget( song_url ) {
   getCurrentSongInfoForBackground( song_url );
-  $( '#playlist' ).prepend(
-    '<iframe src="' +
-    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true" class="mobile-hide"></iframe>');
-    $('#open').attr('src', "spotify:track:" + song_url);
+
+  iframeHTML = '<iframe src="' +
+    'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + ' id="' + song_url +'" ' + ' width="320" height="380" frameborder="0" allowtransparency="true"></iframe>';
+
+  $( '#playlist' ).prepend( iframeHTML );
+
+  $( '#open' ).attr('src', "spotify:track:" + song_url);
 }
 
 
@@ -60,7 +70,9 @@ function nextSong() {
   // if there are more songs, play the next one
   if ( nextSongExists() ) {
     $( '#playlist iframe:first' ).remove();
+
     displaySpotifyWidget( $( 'li:first' ).attr( 'id' ) );
+
     $( '#playlist li:first' ).remove();
   }
 }
@@ -71,12 +83,12 @@ function processSong( res ) {
    return;
   }
 
-  var spotifyID = res.tracks.items[0].id;
-
   if ( $( '#' + spotifyID ).length !== 0 ) {
      alert( 'Song already exists!' );
      return;
   }
+
+  var spotifyID = res.tracks.items[0].id;
 
   $.ajax({
     url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
@@ -97,7 +109,7 @@ function processSong( res ) {
 
 function displaySong( song ) {
   var songTitle = (song.name + " by " + song.artist);
-
+// debugger
   if ( songTitle.length > 30 ) {
     songTitle = songTitle.substring(0,27) + '...';
   }
@@ -113,11 +125,18 @@ function displaySong( song ) {
   song_length = song.length;
 }
 
-function setUpNextSongTimer(length) {
-  if ( nextSongExists() ) {
-    songTimer = window.setTimeout( nextSong, 5000 );
+function setUpNextSongTimer() {
+  if ( upcomingSongLengths.length !== 0 ) {
+    songTimer = window.setTimeout( nextSong, upcomingSongLengths[0] );
+
+console.log( 'set timer for ' + upcomingSongLengths[0] );
+    upcomingSongLengths.shift();
   }
 }
+
+// console.log("set timer to " + upcomingSongLengths[0]);
+//     upcomingSongLengths.shift();
+//   }
 
 function setUpSubmitButton() {
   $( '#add-song' ).submit( function( e ) {
@@ -141,7 +160,6 @@ function setUpSubmitButton() {
 
     searchbox.val( '' );
     searchbox.attr( 'data-sid', '' );
-
   });
 }
 
@@ -152,7 +170,6 @@ function processTrackGet( resTrack ) {
      alert( 'Song already exists!' );
      return;
   }
-
 
   $.ajax({
     url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
@@ -208,8 +225,9 @@ function replaceBackgroundByID( youtubeID ) {
 
 function setUpSkipButton() {
   $( '#skip-button' ).click( function() {
-    if ( $( '#playlist' ).children().length > 1 ) {
+    if ( upcomingSongLengths.length > 0 ) {
       nextSong();
+      setUpNextSongTimer();
     }
   });
 }
