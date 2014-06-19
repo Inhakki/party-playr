@@ -1,5 +1,7 @@
+
 var songTimer;
 var upcomingSongLengths = [];
+var currentRequest;
 
 $( document ).ready( function() {
   // set up the background video, default to Norah Jones
@@ -41,6 +43,7 @@ console.log( "added song length" + response["requests"][i].song.length );
     // display a special design for the first (current) song
     if ( i === 0 )  {
       displaySpotifyWidget( response["requests"][0].song.spotify_url );
+      currentRequest = response["requests"][0].id
     }
     // subsequent songs just get listed in ordinary form
     else {
@@ -75,6 +78,13 @@ function nextSong() {
 
     $( '#playlist li:first' ).remove();
   }
+
+  $.ajax({
+      url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/requests/' + currentRequest,
+      type: 'patch',
+      dataType: 'json',
+      data: {request: {played: true}}
+    });
 }
 
 function processSong( res ) {

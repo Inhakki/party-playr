@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   post "room_search" => "rooms#search"
+  get "/rooms/:key" => "rooms#show"
+  patch "/rooms/:key/requests/:id" => "requests#update"
+  put "/rooms/:key/requests/:id" => "requests#update"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -15,7 +18,6 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
     resources :rooms, only: [:create] do
       resources :songs, only: [:new, :create]
-      resources :requests, only: [:update]
       get "playlist" => "requests#playlist"
       get "history" => "requests#history"
     end
