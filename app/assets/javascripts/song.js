@@ -1,6 +1,6 @@
 $( document ).ready( function() {
   // set up the background video, default to Norah Jones
-  videoId = '-bAJM3vGl5M';
+  var videoId = '-bAJM3vGl5M';
 
   //media query: if screen is at least this large, play video
   if (window.matchMedia("screen and (min-width: 450px)").matches) {
@@ -28,6 +28,33 @@ $( '.rooms.show' ).ready( function() {
     }).then( displaySongs );
   }
 
+  function refreshSongs() {
+    $.ajax({
+      url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/playlist",
+      type: "get",
+      dataType: "json",
+      context: this
+    }).then( refreshPlaylist );
+  }
+
+  function refreshPlaylist( response ) {
+    var toDelete = $( '#playlist li:not(:first)' );
+
+    var nowPlayingLength = songLengths[0];
+    songLengths = [];
+    songLengths.push( nowPlayingLength );
+
+    toDelete.remove();
+
+    for( var i = 1, n = response["requests"].length; i < n; i++ ) {
+      // add the song to the list
+      displaySong( response["requests"][i].song,  response["requests"][i].id );
+
+      // save the length of each song
+      songLengths.push( response["requests"][i].song.length );
+    }
+  }
+
   function getHistory() {
     $.ajax({
       url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/history",
@@ -37,10 +64,28 @@ $( '.rooms.show' ).ready( function() {
     }).then( displayHistory );
   }
 
-  function displaySongs( response ) {
-    for( i = 0, n = response["requests"].length; i < n; i++ ) {
+  function refreshHistory() {
+    $.ajax({
+      url: "/rooms/" + $( 'h1:first' ).attr( 'data-num' ) + "/history",
+      type: "get",
+      dataType: "json",
+      context: this
+    }).then( refreshHistoryList );
+  }
+
+  function refreshHistoryList() {
+    $( '#already-played-songs li' ).remove();
+
+    for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
-      displaySong( response["requests"][i].song );
+      displayPlayedSong( response["requests"][i].song );
+    }
+  }
+
+  function displaySongs( response ) {
+    for( var i = 0, n = response["requests"].length; i < n; i++ ) {
+      // add the song to the list
+      displaySong( response["requests"][i].song,  response["requests"][i].id );
 
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
@@ -48,7 +93,7 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function displayHistory( response ) {
-     for( i = 0, n = response["requests"].length; i < n; i++ ) {
+     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
       displayPlayedSong( response["requests"][i].song );
     }
@@ -56,6 +101,13 @@ $( '.rooms.show' ).ready( function() {
 
   // moves on to the next song and sets the next timer
   function nextSong() {
+    $.ajax({
+      url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/requests/' + $( '#playlist li:first' ).attr( 'data-request'),
+      type: 'patch',
+      dataType: 'json',
+      data: {request: {played: true}}
+     });
+
     // if there are more songs, play the next one
     if ( nextSongExists() ) {
       $( '#playlist' ).children().first().remove();
@@ -66,7 +118,7 @@ $( '.rooms.show' ).ready( function() {
 
   function activateFirstSong() {
     // get the spotify id for the first song
-    sid = $( '#playlist li:first' ).attr( 'id' );
+    var sid = $( '#playlist li:first' ).attr( 'id' );
 
     // play the song, update the background, set the next timer
     $( '#open' ).attr( 'src', "spotify:track:" + sid );
@@ -102,10 +154,10 @@ $( '.rooms.show' ).ready( function() {
         }
       },
       context: this
-    }).then( displaySong );
+    }).then( refreshSongs );
   }
 
-  function displaySong( song ) {
+  function displaySong( song, requestID ) {
     var songTitle = (song.name + " by " + song.artist);
 
     // cut the title down to size if necessary
@@ -113,7 +165,7 @@ $( '.rooms.show' ).ready( function() {
       songTitle = songTitle.substring(0,27) + '...';
     }
 
-    var listItemHTML = "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>";
+    var listItemHTML = "<li id=" + song.spotify_url + " class='playlist-item'" + " data-length=" + song.length + " + data-request=" + requestID + "><img src=" + song.album_art + " class='album-art'><div class='song-title'>" + songTitle + "</div><div class='vote'>+1</div></li>";
 
     $( '#playlist' ).append( listItemHTML );
   }
@@ -140,7 +192,7 @@ $( '.rooms.show' ).ready( function() {
     $( '#add-song' ).submit( function( e ) {
       e.preventDefault();
 
-      searchbox = $( '#song-title-query' );
+      var searchbox = $( '#song-title-query' );
 
       var query = searchbox.val().split( ' ' ).join( '+' );
       var sid = searchbox.attr( 'data-sid' );
@@ -183,7 +235,7 @@ $( '.rooms.show' ).ready( function() {
         }
       },
       context: this
-    }).then( displaySong );
+    }).then( refreshSongs );
   }
   function getCurrentSongInfoForBackground( spotifyID ) {
     $.ajax({
@@ -195,10 +247,10 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function getBackgroundImageURL( res ) {
-    name = res.name;
-    artist = res.artists[0].name;
-    query = escape( name ) + "+" + escape( artist ) + "+live";
-    url = "https://gdata.youtube.com/feeds/api/videos?q=" + query + "&alt=json";
+    var name = res.name;
+    var artist = res.artists[0].name;
+    var query = escape( name ) + "+" + escape( artist ) + "+live";
+    var url = "https://gdata.youtube.com/feeds/api/videos?q=" + query + "&alt=json";
 
     $.ajax({
       url: url,

@@ -4,6 +4,7 @@
 <div class="slide-out-div">
 
     <h1 data-num='<%= @room.key %>'>Welcome to Room #<%= @room.key %></h1>
+    <%= link_to "Ditch this joint", root_path %>
 
   <!--  <a href="#" class="tubular-volume-up">Volume Up</a> | <a href="#" class="tubular-volume-down">Volume Down</a> | -->
 
@@ -11,15 +12,15 @@
     <input id="song-title-query" autofocus data-sid="" placeholder="I want to hear..." type="text">
   </form>
 
-  <ul id="playlist">
-  </ul>
-
   <div id="video-controls" class="black-65 mobile-hide">
     <a href="#" class="tubular-play">Play Video</a> |
     <a href="#" class="tubular-pause">Pause Video</a> |
     <a href="#" class="tubular-mute">Video Sound</a> |
     <a href="#" id="skip-button">Skip!</a>
   </div>
+
+  <ul id="playlist">
+  </ul>
     <!-- Hardcoded the played songs list as placeholder in order to add the drawer functionality.  JES -->
     <h2 id="graveyard">Click To See Past Songs</h2>
       <ul id="already-played-songs">
