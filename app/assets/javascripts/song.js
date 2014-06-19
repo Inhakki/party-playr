@@ -50,12 +50,7 @@ function displaySpotifyWidget( song_url ) {
   $( '#playlist' ).prepend(
     '<iframe src="' +
     'https://embed.spotify.com/?uri=spotify:track:' + song_url + '"' + 'id="' + song_url +'"' + 'width="320" height="380" frameborder="0" allowtransparency="true"></iframe>');
-}
-
-// updates the Spotify Widget with a new URL
-function updateSpotifyWidget( song_url ) {
-  newURL = 'https://embed.spotify.com/?uri=spotify:track:' + song_url;
-  $( 'li:first' ).attr( 'src', newURL );
+  $('#open').attr('src', "spotify:track:" + song_url);
 }
 
 // moves on to the next song and sets the next timer
