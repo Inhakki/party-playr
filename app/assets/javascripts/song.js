@@ -100,8 +100,10 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function refreshPlaylistIncludingFirst( response ) {
+
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
+
       displaySong( response["requests"][i].song,  response["requests"][i].id );
 
       // save the length of each song
@@ -233,7 +235,7 @@ $( '.rooms.show' ).ready( function() {
       },
       context: this
     }).then( function () {
-      if ( noSongsExist() ) {
+      if ( songsExist() ) {
         refreshSongs();
         refreshHistory();
       } else {
@@ -244,6 +246,8 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function displaySong( song, requestID ) {
+    // debugger
+
     var songTitle = (song.name + " by " + song.artist);
 
     // cut the title down to size if necessary
@@ -251,14 +255,15 @@ $( '.rooms.show' ).ready( function() {
       songTitle = songTitle.substring(0,27) + '...';
     }
 
-    var listItemHTML = "<li id=" + song.spotify_url +
-    " class='playlist-item'" + " data-length=" +
-    song.length + " + data-request=" + requestID +
-    "><img src=" + song.album_art +
-    " class='album-art'><div class='song-title'>" + songTitle +
+    var listItemHTML = "<li id='" + song.spotify_url +
+    "' class='playlist-item'" + " data-length='" +
+    song.length + "' data-request='" + requestID +
+    "'><img src='" + song.album_art +
+    "' class='album-art'><div class='song-title'>" + songTitle +
     "</div><div class='vote'>+1</div></li>";
 
-    $( '#playlist' ).append( listItemHTML );
+    var fn = function() { $( '#playlist' ).append( listItemHTML ); }
+    window.setTimeout( fn, 0 );
   }
 
   function displayPlayedSong( song ) {
@@ -313,7 +318,7 @@ $( '.rooms.show' ).ready( function() {
     }
 
     // if we're adding the first song, we have to display the list rather than refresh
-    var fn = noSongsExist() ? refreshSongs : refreshSongsIncludingFirst;
+    var fn = nextSongExists() ? refreshSongs : refreshSongsIncludingFirst;
 
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
@@ -380,7 +385,7 @@ $( '.rooms.show' ).ready( function() {
   }
 
   // indicates whether there is a next song queued up
-  function noSongsExist() {
+  function songsExist() {
     return ( songLengths.length > 0 );
   }
 });
