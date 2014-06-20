@@ -104,7 +104,7 @@ $( '.rooms.show' ).ready( function() {
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
 
-      displaySong( response["requests"][i].song,  response["requests"][i].id );
+      displaySong( response["requests"][i].song,  response["requests"][i].id, response["requests"][i].upvotes );
 
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
@@ -124,7 +124,7 @@ $( '.rooms.show' ).ready( function() {
 
     for( var i = 1, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
-      displaySong( response["requests"][i].song,  response["requests"][i].id );
+      displaySong( response["requests"][i].song,  response["requests"][i].id, response["requests"][i].upvotes );
 
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
@@ -156,7 +156,7 @@ $( '.rooms.show' ).ready( function() {
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
 
-      displaySong( response["requests"][i].song,  response["requests"][i].id );
+      displaySong( response["requests"][i].song,  response["requests"][i].id, response["requests"][i].upvotes );
       // save the length of each song
       songLengths.push( response["requests"][i].song.length );
     }
@@ -248,7 +248,7 @@ $( '.rooms.show' ).ready( function() {
     });
   }
 
-  function displaySong( song, requestID ) {
+  function displaySong( song, requestID, upvotes ) {
     // debugger
 
     var songTitle = (song.name + " by " + song.artist);
@@ -263,7 +263,7 @@ $( '.rooms.show' ).ready( function() {
     song.length + "' data-request='" + requestID +
     "'><img src='" + song.album_art +
     "' class='album-art'><div class='song-title'>" + songTitle +
-    "</div><div class='vote'>+1</div></li>";
+    "</div><div class='vote'>"+ upvotes + "</div></li>";
 
     var fn = function() { $( '#playlist' ).append( listItemHTML ); }
     window.setTimeout( fn, 0 );
