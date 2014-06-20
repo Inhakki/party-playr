@@ -185,6 +185,10 @@ input:hover {
   outline: none;
 }
 
+button:focus {
+  outline: none;
+}
+
 
 /* hack-fix to remove placeholder text on click */
 input:focus::-webkit-input-placeholder {

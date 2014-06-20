@@ -40,17 +40,19 @@ $( '.rooms.show' ).ready( function() {
     }
   }
 
-  function bindUpVote( votes ) {
-    votes.on( 'click', function() {
-      var $request = $( this ).parent();
-      $.ajax({
-        url: '/requests/upvote/' + $request.attr( 'data-request'),
-        type: 'post',
-        dataType: 'json'
-        //don't need to send any data...just love-tapping controller
-      });
-    });
-  }
+  // function bindUpVote() {
+  //   var votes = $( '.vote' )
+  //   votes.on( 'click', function() {
+  //     var $request = $( this ).parent();
+  //     $.ajax({
+  //       url: '/requests/upvote/' + $request.attr( 'data-request'),
+  //       type: 'post',
+  //       dataType: 'json'
+  //       //don't need to send any data...just love-tapping controller
+  //     });
+  //     refreshFunction();
+  //   });
+  // }
 
   function turnOffFormEnter() {
     $( '#add-song' ).bind( 'keyup keypress' , function( e ) {
@@ -132,7 +134,7 @@ $( '.rooms.show' ).ready( function() {
       songLengths.push( response["requests"][i].song.length );
     }
 
-    bindUpVote( $( '.vote' ) );
+    // window.setTimeout( bindUpVote, 1000 );
   }
 
   function refreshHistorySongs( response ) {
@@ -163,7 +165,7 @@ $( '.rooms.show' ).ready( function() {
       songLengths.push( response["requests"][i].song.length );
     }
 
-    bindUpVote( $('.vote') );
+    // window.setTimeout( bindUpVote, 1000 );
   }
 
   function displayHistory( response ) {
@@ -263,7 +265,7 @@ $( '.rooms.show' ).ready( function() {
     song.length + "' data-request='" + requestID +
     "'><img src='" + song.album_art +
     "' class='album-art'><div class='song-title'>" + songTitle +
-    "</div><div class='vote'>"+ upvotes + "</div></li>";
+    "</div><div class='vote'>+1</div></li>";
 
     var fn = function() { $( '#playlist' ).append( listItemHTML ); }
     window.setTimeout( fn, 0 );
