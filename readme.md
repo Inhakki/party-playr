@@ -1,4 +1,4 @@
-# GigHub
+# Partify
 
 ### GA WDI DC April 2014, Project 2
 
