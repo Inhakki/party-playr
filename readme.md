@@ -4,8 +4,6 @@
 
 ### Overview
 
-**Partify** is an application for aggregating, listing and tracking concerts. GigHub was developed as an initial Rails individual project for the April 2014 Web Development Immersive course at General Assembly DC. It was developed over a four day sprint to model the agile software development process.
-
 **Partify** is an application for collaborative playlists and playback. Partify was developed as a group Rails project for the April 2014 Web Development Immersive Course at General Assembly DC. It was developed over a five day sprint to model the agile software development process including Git version control and daily SCRUMs.
 
 ### Technologies Used
@@ -39,20 +37,13 @@ A full list of user stories can be found by looking at the issues on this GitHub
 <img src="/blob/master/party_playlist.png">
 
 <h4>Team Members</h4>
-<li><b>Brett Wallace</b> - [@](bwallace90@gmail.com)</li>
-
-<li><b>JoElla Straley</b> - [@](jstraley@gmail.com)</li>
-
-<li><b>Alexi Phillipson</b> - [@](alexi83@gmail.com)</li>
-
-<li><b>Jacob Cain</b> - [@](jcain3389@yahoo.com)</li>
-
-<li><b>Stephen Stanwood</b> - [@](stephen@stanwoodsolutions.com)
-</li>
-
-<li><b>Jon Eva</b> - [@](jonathoneva@gmail.com)</li>
-
-<li><b>Parker Hart</b> - [@](parkerhart@gmail.com)</li>
+* Brett Wallace - [GitHub](https://github.com/BYWallace)
+* JoElla Straley - [GitHub](https://github.com/joellastraley)
+* Alexi Phillipson - [GitHub](https://github.com/alexi215)
+* Jacob Cain - [GitHub](https://github.com/jcain3389)
+* Stephen Stanwood - [GitHub](https://github.com/stephenstanwood)
+* Jon Eva - [GitHub](https://github.com/jeva33)
+* Parker Hart - [GitHub](https://github.com/parkerhart)
 
 ***
 Written by Brett Wallace and Parker Hart
