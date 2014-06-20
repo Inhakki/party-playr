@@ -1,16 +1,42 @@
-# PLAYR
-```````
-TODAY'S PARTY PLAYER! 
+# GigHub
 
-```````
-<a href="http://tinypic.com?ref=14wez6b" target="_blank"><img src="https://s3.amazonaws.com/uploads.hipchat.com/39979/759889/cvGy3w3QyB3iUcO/Player-Logo-bk-01.png" border="0" alt="PLAYR" style="width: 200px;"></a>
+### GA WDI DC April 2014, Project 2
 
-[pplayr.com](http://www.pplayr.co)
- 
-[heroku.pplayr.com](http://pplayr.herokuapp.com/)
+### Overview
 
+**Partify** is an application for aggregating, listing and tracking concerts. GigHub was developed as an initial Rails individual project for the April 2014 Web Development Immersive course at General Assembly DC. It was developed over a four day sprint to model the agile software development process.
 
+**Partify** is an application for collaborative playlists and playback. Partify was developed as a group Rails project for the April 2014 Web Development Immersive Course at General Assembly DC. It was developed over a five day sprint to model the agile software development process including Git version control and daily SCRUMs.
 
+### Technologies Used
+
+* Ruby 2.1.1
+* Rails 4.1.1
+* PostgreSQL 9.3.4
+* jQuery
+* jQuery UI 1.10.4
+* [Spotify search API](https://developer.spotify.com/web-api/)
+* [Tubular jQuery plugin](http://www.seanmccambridge.com/tubular/)
+* [Active Model Serializers](https://github.com/rails-api/active_model_serializers)
+* Testing using [rspec-rails](https://github.com/rspec/rspec-rails), [capybara](https://github.com/jnicklas/capybara), [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers) and [factory_girl_rails](https://github.com/thoughtbot/factory_girl_rails)
+
+### User Stories Completed
+
+* As a host I want to skip a song in case it's something nobody really wants to listen to.
+* As a user I want a private key, so that only people I know can join the room.
+* As a user I want to see upcoming songs, so we can plan our playlist additions accordingly.
+* As a user I want to add a song to the playlist using my mobile device, so that I can contribute to the party soundtrack.
+* As a user I want to see previously played songs, so I can remember a song for later.
+* As a user I want to see accompanying and related background video for the song, so that I can get some visual stimulation.
+* As a host I want duplicate songs to be rejected, so that we don't get multiple plays of the same song in a row.
+
+### Backlog
+
+A full list of user stories can be found by looking at the issues on this GitHub repo.
+
+### ERD
+
+<img src="/blob/master/party_playlist.png">
 
 <h4>Team Members</h4>
 <li><b>Brett Wallace</b> - [@](bwallace90@gmail.com)</li>
@@ -28,43 +54,8 @@ TODAY'S PARTY PLAYER!
 
 <li><b>Parker Hart</b> - [@](parkerhart@gmail.com)</li>
 
+***
+Written by Brett Wallace and Parker Hart
 
 
 
-<h4>Overview</h4>
-
-<b>PLAYR</b> is a dynamic web application that implements the power of ``Spotify`` and the love of your friends. Through <b>PLAYR</b> a user or host has the ability to create a "room" that will simply be a music playlist that allows other users to join, through an invite code and vote on what song they wish to be played next. Fellow friends will be able to search and add songs through <b>PLAYR</b> as well as vote on the next song to be played. By way of superb coding, we have enabled a host to engage party guests through a simple and easy to use application that allows users to pick the music they wish to hear! The application has no minimum requirements and is avaliable to the public. 
-
-<h4>Technologies Used</h4>
-
-<li>Ruby 2.1.1</l1>
-<li>Ruby on Rails 4.1.1p76</li>
-<li>PostgreSQL Database</li>
-<li>Spotify Developers API</li>
-<li>Javascript</li>
-<li>J-Query</li>
-<li>AJAX</li>
-<li>Dynamic Website</li>
-<li>Blah, Blah, Blah</li>
-
-
-<h4>User Stories</h4>
-
-The <b>PLAYR</b> team engaged the resources of Github in the creation and implitation of user stories. The user stories can be found at 
-`https://github.com/stephenstanwood/party-playr/issues`
-
-<h4>Entity-Relationship-Model (ERD)</h4>
-
-The following links to the ERD used in the development of <b>PLAYR</b>. 
-`http://www.gliffy.com`
-
-
-<h4>Deployment Instructions</h4>
-
-
-`````
-bundle install
-rake db:setup
-rails server
-
-`````
