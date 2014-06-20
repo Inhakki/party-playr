@@ -200,7 +200,7 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function progressBar(time) {
-    $("#fuckyeah").animate({
+    $("#progress-bar").animate({
       height: "15px",
       width: "200px",
   }, time);
