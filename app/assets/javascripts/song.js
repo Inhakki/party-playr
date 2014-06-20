@@ -100,7 +100,6 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function refreshPlaylistIncludingFirst( response ) {
-
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
 
@@ -110,15 +109,18 @@ $( '.rooms.show' ).ready( function() {
       songLengths.push( response["requests"][i].song.length );
     }
 
-    activateFirstSong();
+    window.setTimeout( activateFirstSong, 2000 );
   };
 
   function refreshPlaylist( response ) {
     var toDelete = $( '#playlist li:not(:first)' );
 
-    var nowPlayingLength = songLengths[0];
-    songLengths = [];
-    songLengths.push( nowPlayingLength );
+    // if there is a song playing, preserve its length
+    if ( songLengths.length !== 0 ) {
+      var nowPlayingLength = songLengths[0];
+      songLengths = [];
+      songLengths.push( nowPlayingLength );
+    }
 
     toDelete.remove();
 
@@ -134,7 +136,6 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function refreshHistorySongs( response ) {
-
     $( "#already-played-songs li" ).remove();
 
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
@@ -153,6 +154,7 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function displaySongs( response ) {
+
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
 
@@ -181,7 +183,7 @@ $( '.rooms.show' ).ready( function() {
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/requests/' + $( '#playlist li:first' ).attr( 'data-request'),
       type: 'patch',
       dataType: 'json',
-      data: {request: {played: true}}
+      data: { request: { played: true } }
      });
 
     // if there are more songs, play the next one
@@ -196,7 +198,7 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function activateFirstSong() {
-    if ( $( '#playlist li:first' ).length === 0 ) return;
+    if ( songLengths.length === 0 ) return;
 
     // get the spotify id for the first song
     sid = $( '#playlist li:first' ).attr( 'id' );
@@ -249,8 +251,6 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function displaySong( song, requestID, upvotes ) {
-    // debugger
-
     var songTitle = (song.name + " by " + song.artist);
 
     // cut the title down to size if necessary
@@ -320,8 +320,8 @@ $( '.rooms.show' ).ready( function() {
        return;
     }
 
-    // if we're adding the first song, we have to display the list rather than refresh
-    var fn = nextSongExists() ? refreshSongs : refreshSongsIncludingFirst;
+    // if we're adding the first song, we have to refresh all of the songs
+    var fn = ( songLengths.length === 0 ) ? refreshSongsIncludingFirst : refreshSongs;
 
     $.ajax({
       url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/songs',
