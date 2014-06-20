@@ -13,7 +13,7 @@ $( '.rooms.show' ).ready( function() {
   var songLengths = [];
 
   var refreshFunction = function() {
-    refreshSongs();
+    ( songLengths.length === 0 ) ?  refreshSongsIncludingFirst() : refreshSongs();
     refreshHistory();
   }
   var refreshTimer = window.setInterval( refreshFunction, 5000);
