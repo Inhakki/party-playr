@@ -134,6 +134,9 @@ $( '.rooms.show' ).ready( function() {
   }
 
   function refreshHistorySongs( response ) {
+
+    $( "#already-played-songs li" ).remove();
+
     for( var i = 0, n = response["requests"].length; i < n; i++ ) {
       // add the song to the list
       displayPlayedSong( response["requests"][i].song,  response["requests"][i].id );
