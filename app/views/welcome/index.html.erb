@@ -1,14 +1,14 @@
 <div class="home-content">
   <h1 class="home">Partify</h1>
 
-  <h2>Get a party started!</h2>
+  <h2>get a party started!</h2>
     <%= form_tag(rooms_path, method: :create) do %>
       <%= image_submit_tag("create_button.png") %>
     <% end %>
   <h2>Join a party!</h2>
   <%= form_tag(room_search_path, method: :post) do %>
     <%= text_field_tag 'search_room', nil, maxlength: 4, placeholder: 'ROOM' %>
-    <%= image_submit_tag("join_button.png") %>
+    <%= image_submit_tag("join_button.png", :class => 'joinz_up') %>
   <% end %>
 </div>
 

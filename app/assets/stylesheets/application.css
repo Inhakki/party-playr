@@ -53,7 +53,7 @@ body {
 
 
 h1.home {
-  font-size: 60px;
+  font-size: 58 px;
   margin: 2px 2px;
   text-align: center;
   margin: 0px;
@@ -72,6 +72,7 @@ h2 {
 
 .home-content {
   background-color: rgba(174, 167, 167, 0.7);
+  padding-bottom: 50px;
   position: fixed; top: 0; left: 0;
   width: 320px;
 }
@@ -85,6 +86,8 @@ h2 {
   padding-bottom: 10px;
   margin-bottom: 5px;
 }
+
+
 
 #search_room {
   font-size: 36px;
@@ -102,7 +105,7 @@ h2 {
   font-family: 'Amatic SC';
   font-size: 30px;
   position: fixed; top: 0; left: 0;
-  width: 325px;
+  width: 333px;
 }
 
 .move-div {
@@ -177,6 +180,7 @@ h2 {
 input:hover {
   outline: none;
 }
+
 
 /* hack-fix to remove placeholder text on click */
 input:focus::-webkit-input-placeholder {
