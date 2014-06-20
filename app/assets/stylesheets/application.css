@@ -161,6 +161,31 @@ h2 {
   cursor: pointer;
 }
 
+#playlist li:first-child {
+  height: 70px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#playlist li:first-child .album-art {
+  width: 60px;
+  float: left;
+  padding-top: 5px;
+}
+
+#playlist li:first-child .song-title {
+  display: inline-block;
+  float: left;
+}
+
+#playlist li:first-child .vote {
+  display: none;
+}
+
+#progress-bar {
+  position: absolute; left: 70px; top: 45px;
+}
+
 
 .slide-out-div {
   background-color: rgba(174, 167, 167, 0.7);

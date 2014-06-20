@@ -199,6 +199,13 @@ $( '.rooms.show' ).ready( function() {
     }
   }
 
+  function progressBar(time) {
+    $("#fuckyeah").animate({
+      height: "15px",
+      width: "200px",
+  }, time);
+}
+
   function activateFirstSong() {
     if ( songLengths.length === 0 ) return;
 
@@ -210,6 +217,7 @@ $( '.rooms.show' ).ready( function() {
       $( '#open' ).attr( 'src', "spotify:track:" + sid );
       getCurrentSongInfoForBackground( sid );
       setUpNextSongTimer();
+      progressBar(songLengths[0]);
     }
   }
 
@@ -265,7 +273,7 @@ $( '.rooms.show' ).ready( function() {
     song.length + "' data-request='" + requestID +
     "'><img src='" + song.album_art +
     "' class='album-art'><div class='song-title'>" + songTitle +
-    "</div><div class='vote'>+1</div></li>";
+    "</div><div class='vote'>+1</div><img id='progress-bar' src='http://placehold.it/1x15'></li>";
 
     var fn = function() { $( '#playlist' ).append( listItemHTML ); }
     window.setTimeout( fn, 0 );
