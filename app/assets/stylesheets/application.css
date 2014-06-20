@@ -192,6 +192,7 @@ h2 {
   float: left;
   height: 100%;
   margin-top: 20px;
+  overflow: auto;
   padding: 15px;
   position: fixed; left: 0;
 }
