@@ -16,7 +16,6 @@
 * [Spotify search API](https://developer.spotify.com/web-api/)
 * [Tubular jQuery plugin](http://www.seanmccambridge.com/tubular/)
 * [Active Model Serializers](https://github.com/rails-api/active_model_serializers)
-* Testing using [rspec-rails](https://github.com/rspec/rspec-rails), [capybara](https://github.com/jnicklas/capybara), [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers) and [factory_girl_rails](https://github.com/thoughtbot/factory_girl_rails)
 
 ### User Stories Completed
 
