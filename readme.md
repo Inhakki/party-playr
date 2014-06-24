@@ -6,6 +6,8 @@
 
 **Partify** is an application for collaborative playlists and playback. Partify was developed as a group Rails project for the April 2014 Web Development Immersive Course at General Assembly DC. It was developed over a five day sprint to model the agile software development process including Git version control and daily SCRUMs.
 
+**[check it out on Heroku](pplayr.herokuapp.com)**
+
 ### Technologies Used
 
 * Ruby 2.1.1
