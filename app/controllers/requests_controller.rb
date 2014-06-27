@@ -29,7 +29,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:played)
+    params.require(:request).permit(:played, :upvotes)
   end
 
 end

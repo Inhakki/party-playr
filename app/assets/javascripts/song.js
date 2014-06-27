@@ -51,6 +51,7 @@ $( '.rooms.show' ).ready( function() {
   function bindUpVote() {
     var votes = $( '.vote' )
     votes.on( 'click', function() {
+      $(this).hide();
       var $request = $( this ).parent();
       $.ajax({
         url: '/requests/upvote/' + $request.attr( 'data-request'),
@@ -222,14 +223,12 @@ $( '.rooms.show' ).ready( function() {
     // play the song, update the background, set the next timer
     if ( window.matchMedia( 'screen and (min-width: 450px)' ).matches ) {
 
-      for(var i = 0; i < 100; i++) {
-        $.ajax({
-          url: '/requests/upvote/' + $( '#playlist li:first' ).attr( 'data-request'),
-          type: 'post',
-          dataType: 'json'
-          //don't need to send any data...just love-tapping controller
-        });
-      }
+      $.ajax({
+      url: '/rooms/' + $( 'h1:first' ).attr( 'data-num' ) + '/requests/' + $( '#playlist li:first' ).attr( 'data-request'),
+      type: 'patch',
+      dataType: 'json',
+      data: { request: { upvotes: 100 } }
+     });
 
       $( '#open' ).attr( 'src', "spotify:track:" + sid );
       getCurrentSongInfoForBackground( sid );
