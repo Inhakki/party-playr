@@ -8,11 +8,19 @@ $( document ).ready( function() {
   }
 });
 
+var sideBar = $(".slide-out-div");
+
 $( '.rooms.show' ).ready( function() {
   var songTimer;
   var songLengths = [];
 
   var refreshFunction = function() {
+    var yScroll = sideBar.scrollTop();
+    var xScroll = sideBar.scrollLeft();
+
+    sideBar.scrollTop(yScroll);
+    sideBar.scrollLeft(xScroll);
+
     ( songLengths.length === 0 ) ?  refreshSongsIncludingFirst() : refreshSongs();
     refreshHistory();
   }
