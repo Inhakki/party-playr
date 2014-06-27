@@ -24,7 +24,11 @@ $( '.rooms.show' ).ready( function() {
     ( songLengths.length === 0 ) ?  refreshSongsIncludingFirst() : refreshSongs();
     refreshHistory();
   }
-  var refreshTimer = window.setInterval( refreshFunction, 5000);
+  if (window.matchMedia("screen and (min-width: 450px)").matches) {
+    var refreshTimer = window.setInterval( refreshFunction, 5000);
+  } else {
+    var refreshTimer = window.setInterval( refreshFunction, 10000);
+  }
 
   getSongList();
   getHistory();
