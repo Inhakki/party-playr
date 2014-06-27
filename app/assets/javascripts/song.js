@@ -40,19 +40,18 @@ $( '.rooms.show' ).ready( function() {
     }
   }
 
-  // function bindUpVote() {
-  //   var votes = $( '.vote' )
-  //   votes.on( 'click', function() {
-  //     var $request = $( this ).parent();
-  //     $.ajax({
-  //       url: '/requests/upvote/' + $request.attr( 'data-request'),
-  //       type: 'post',
-  //       dataType: 'json'
-  //       //don't need to send any data...just love-tapping controller
-  //     });
-  //     refreshFunction();
-  //   });
-  // }
+  function bindUpVote() {
+    var votes = $( '.vote' )
+    votes.on( 'click', function() {
+      var $request = $( this ).parent();
+      $.ajax({
+        url: '/requests/upvote/' + $request.attr( 'data-request'),
+        type: 'post',
+        dataType: 'json'
+        //don't need to send any data...just love-tapping controller
+      });
+    });
+  }
 
   function turnOffFormEnter() {
     $( '#add-song' ).bind( 'keyup keypress' , function( e ) {
@@ -134,7 +133,7 @@ $( '.rooms.show' ).ready( function() {
       songLengths.push( response["requests"][i].song.length );
     }
 
-    // window.setTimeout( bindUpVote, 1000 );
+     window.setTimeout( bindUpVote, 1000 );
   }
 
   function refreshHistorySongs( response ) {
@@ -165,7 +164,7 @@ $( '.rooms.show' ).ready( function() {
       songLengths.push( response["requests"][i].song.length );
     }
 
-    // window.setTimeout( bindUpVote, 1000 );
+     window.setTimeout( bindUpVote, 1000 );
   }
 
   function displayHistory( response ) {
@@ -214,6 +213,16 @@ $( '.rooms.show' ).ready( function() {
 
     // play the song, update the background, set the next timer
     if ( window.matchMedia( 'screen and (min-width: 450px)' ).matches ) {
+
+      for(var i = 0; i < 100; i++) {
+        $.ajax({
+          url: '/requests/upvote/' + $( '#playlist li:first' ).attr( 'data-request'),
+          type: 'post',
+          dataType: 'json'
+          //don't need to send any data...just love-tapping controller
+        });
+      }
+
       $( '#open' ).attr( 'src', "spotify:track:" + sid );
       getCurrentSongInfoForBackground( sid );
       setUpNextSongTimer();
@@ -268,12 +277,23 @@ $( '.rooms.show' ).ready( function() {
       songTitle = songTitle.substring(0,27) + '...';
     }
 
-    var listItemHTML = "<li id='" + song.spotify_url +
-    "' class='playlist-item'" + " data-length='" +
-    song.length + "' data-request='" + requestID +
-    "'><img src='" + song.album_art +
-    "' class='album-art'><div class='song-title'>" + songTitle +
-    "</div><div class='vote'>+1</div><img id='progress-bar' src='http://placehold.it/1x15'></li>";
+    if (window.matchMedia("screen and (min-width: 450px)").matches) {
+
+      var listItemHTML = "<li id='" + song.spotify_url +
+      "' class='playlist-item'" + " data-length='" +
+      song.length + "' data-request='" + requestID +
+      "'><img src='" + song.album_art +
+      "' class='album-art'><div class='song-title'>" + songTitle +
+      "</div><div class='vote'>" + upvotes + "</div><img id='progress-bar' src='http://placehold.it/1x15'></li>";
+
+    } else {
+      var listItemHTML = "<li id='" + song.spotify_url +
+      "' class='playlist-item'" + " data-length='" +
+      song.length + "' data-request='" + requestID +
+      "'><img src='" + song.album_art +
+      "' class='album-art'><div class='song-title'>" + songTitle +
+      "</div><div class='vote'>+1</div><img id='progress-bar' src='http://placehold.it/1x15'></li>";
+    }
 
     var fn = function() { $( '#playlist' ).append( listItemHTML ); }
     window.setTimeout( fn, 0 );
