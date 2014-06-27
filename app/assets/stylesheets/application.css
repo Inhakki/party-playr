@@ -68,6 +68,7 @@ h1.home {
 
 .slide-out-div .footer {
   background-color: black;
+  clear: both;
   position: fixed; bottom: 0; left: 0;
   width: 28.1%;
 }
@@ -173,7 +174,7 @@ h2 {
   float: right;
   /*font-family: 'Londrina Shadow';*/
   font-size: 25px;
-  height: 40px;
+  height: 50px;
   text-align: center;
   width: 40px;
 }
