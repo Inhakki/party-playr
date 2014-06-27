@@ -66,11 +66,15 @@ h1.home {
   font-size: 40px;
 }
 
-.slide-out-div .footer {
+.footer {
   background-color: black;
-  position: fixed; bottom: 0; left: 0;
-  width: 28.1%;
-  z-index: 200;
+  bottom: 0;
+  position: relative;
+  width: 100%;
+}
+
+.footer a {
+  color: white;
 }
 
 /*.move {
@@ -97,7 +101,6 @@ h2 {
 
 .home-content {
   background-color: rgba(174, 167, 167, 0.7);
-  padding-bottom: 50px;
   position: fixed; top: 0; left: 0;
   width: 320px;
 }
@@ -317,10 +320,10 @@ ul {
   }
 }
 
-@media (max-width: 450px) {
+/*@media (max-width: 450px) {
 
 .slide-out-div .footer {
   width: 306px;
 }
 
-}
+}*/
